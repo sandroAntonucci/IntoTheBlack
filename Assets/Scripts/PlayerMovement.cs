@@ -1,126 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem; 
 
-public class FPSMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private InputActionAsset playerControls;
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float runSpeed = 10f;
-    [SerializeField] private float crouchSpeed = 2.5f;
-    [SerializeField] private float crouchHeight = 0.5f;
+    public float moveSpeed;
+    public float groundDrag;
 
-    private float normalHeight = 1f;
-    private Camera mainCamera;
+    public float playerHeight = 2f;
+    public LayerMask ground;
+    private bool grounded;
 
-    private InputAction moveAction;
-    private InputAction crouchAction;
-    private InputAction lookAction;
-    private InputAction runAction;
+    public Transform orientation;
 
-    private CharacterController characterController;
+    private float horizontalInput;
+    private float verticalInput;
 
-    private float currentSpeed;
-    private bool isCrouching = false;
-    private Vector2 moveInput;
-    private Vector2 lookInput;
+    private Vector3 moveDirection;
+
+    private Rigidbody rb;
+
+    // Input actions
+    public PlayerControls controls;
+
+    private void Awake()
+    {
+        controls = new PlayerControls();
+    }
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+
+        // Bind input actions
+        controls.Player.Move.performed += ctx => MyInput(ctx);
+        controls.Player.Move.canceled += ctx => MyInput(ctx);
+    }
 
     private void OnEnable()
     {
-        BindActions();
-
-        moveAction.Enable();
-        crouchAction.Enable();
-        lookAction.Enable();
-        runAction.Enable();
-
-        crouchAction.performed += OnCrouch;
-        runAction.performed += OnRun;
-        runAction.canceled += OnRun;
+        controls.Enable();
     }
 
     private void OnDisable()
     {
-        moveAction.Disable();
-        crouchAction.Disable();
-        lookAction.Disable();
-        runAction.Disable();
-
-        crouchAction.performed -= OnCrouch;
-        runAction.performed -= OnRun;
-        runAction.canceled -= OnRun;
+        controls.Disable();
     }
 
-    private void Awake()
+    private void FixedUpdate()
     {
-        characterController = GetComponent<CharacterController>();
-        mainCamera = Camera.main;
-    }
-
-    private void BindActions()
-    {
-        moveAction = playerControls.FindActionMap("Player").FindAction("Move");
-        crouchAction = playerControls.FindActionMap("Player").FindAction("Crouch");
-        lookAction = playerControls.FindActionMap("Player").FindAction("Look");
-        runAction = playerControls.FindActionMap("Player").FindAction("Run");
+        MovePlayer();
     }
 
     private void Update()
     {
-        HandleMovement();
-        HandleLook();
-    }
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, ground);
 
-    private void HandleMovement()
-    {
-        moveInput = moveAction.ReadValue<Vector2>();
-        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
-        move = transform.TransformDirection(move);
-        characterController.Move(move * currentSpeed * Time.deltaTime);
-    }
+        SpeedControl();
 
-    private void HandleLook()
-    {
-        lookInput = lookAction.ReadValue<Vector2>();
-        float mouseX = lookInput.x;
-        float mouseY = lookInput.y;
-
-        transform.Rotate(Vector3.up * mouseX);
-        mainCamera.transform.localRotation *= Quaternion.Euler(-mouseY, 0f, 0f);
-    }
-
-    private void OnRun(InputAction.CallbackContext context)
-    {
-        if (!isCrouching)
+        if (grounded)
         {
-            currentSpeed = context.ReadValueAsButton() ? runSpeed : moveSpeed;
-        }
-    }
-
-    private void OnCrouch(InputAction.CallbackContext context)
-    {
-        if (isCrouching)
-        {
-            StandUp();
+            rb.drag = groundDrag;
         }
         else
         {
-            Crouch();
+            rb.drag = 0;
         }
     }
 
-    private void Crouch()
+    // This function handles the input mapping
+    private void MyInput(InputAction.CallbackContext context)
     {
-        isCrouching = true;
-        characterController.height = crouchHeight;
-        currentSpeed = crouchSpeed;
+        Vector2 input = context.ReadValue<Vector2>(); // Read the 2D vector from the input action
+        horizontalInput = input.x;
+        verticalInput = input.y;
     }
 
-    private void StandUp()
+    private void MovePlayer()
     {
-        isCrouching = false;
-        characterController.height = normalHeight;
-        currentSpeed = moveSpeed;
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+    }
+
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        if (flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
     }
 }

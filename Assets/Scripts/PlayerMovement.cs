@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed;
-    public float groundDrag;
 
-    public float playerHeight = 2f;
-    public LayerMask ground;
-    private bool grounded;
+    // Movement variables
+    [SerializeField] private float moveSpeed;
 
-    public Transform orientation;
+    // Crouch variables
+    [SerializeField] private float playerHeight = 2f;
+    [SerializeField] private float crouchHeight = 1f;
+    [SerializeField] private float crouchSpeed = 4f;
+
+    [SerializeField] private GameObject playerModel;
+
+    [SerializeField] private Transform orientation;
+
+    [SerializeField] private PlayerControls controls;
+
+    private bool isCrouching = false;
 
     private float horizontalInput;
     private float verticalInput;
@@ -21,8 +29,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
 
-    // Input actions
-    public PlayerControls controls;
 
     private void Awake()
     {
@@ -37,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
         // Bind input actions
         controls.Player.Move.performed += ctx => MyInput(ctx);
         controls.Player.Move.canceled += ctx => MyInput(ctx);
+        controls.Player.Crouch.performed += ctx => Crouch();
+        controls.Player.Crouch.canceled += ctx => StandUp();
     }
 
     private void OnEnable()
@@ -56,18 +64,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, ground);
 
         SpeedControl();
 
-        if (grounded)
-        {
-            rb.drag = groundDrag;
-        }
-        else
-        {
-            rb.drag = 0;
-        }
     }
 
     // This function handles the input mapping
@@ -82,16 +81,47 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
+
+        rb.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
     }
 
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        if (flatVel.magnitude > moveSpeed)
+        float maxSpeed = isCrouching ? crouchSpeed : moveSpeed;
+
+        if (flatVel.magnitude > maxSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * maxSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
+
+    private void Crouch()
+    {
+        if (isCrouching) return;
+
+        isCrouching = true;
+
+        // Reduce the player's height
+        playerModel.transform.localScale = new Vector3(transform.localScale.x, crouchHeight, transform.localScale.z);
+
+        // Lower the player's position slightly
+        playerModel.transform.position = new Vector3(transform.position.x, transform.position.y - (playerHeight - crouchHeight) / 2, transform.position.z);
+    }
+
+    private void StandUp()
+    {
+        if (!isCrouching) return;
+
+        isCrouching = false;
+
+        // Restore the player's height
+        playerModel.transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
+
+        // Raise the player's position slightly
+        playerModel.transform.position = new Vector3(transform.position.x, transform.position.y + (playerHeight - crouchHeight) / 2, transform.position.z);
+    }
+
 }

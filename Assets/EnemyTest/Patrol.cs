@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Patrol : MonoBehaviour
 {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     private const float minRemainingDistance = 0.5f;
 
     public GameObject target;
@@ -18,6 +19,8 @@ public class Patrol : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _agent.SetDestination(_agent.transform.position);
 =======
+=======
+>>>>>>> Stashed changes
     private const string ParamWalk = "Walk", ParamRun = "Run";
 
     private const int doubleValue = 1;
@@ -44,11 +47,15 @@ public class Patrol : MonoBehaviour
         agent.speed = speed;
 
         vision = GetComponentInChildren<EnemyVision>();
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 
     private void Update()
     {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         if (_agent.remainingDistance <= minRemainingDistance && !_agent.pathPending)
         {
@@ -58,6 +65,8 @@ public class Patrol : MonoBehaviour
             _agent.SetDestination(newDestination.position);
         }
 =======
+=======
+>>>>>>> Stashed changes
         if (vision.PlayerInSight)
         {
             agent.SetDestination(target.transform.position);
@@ -93,6 +102,9 @@ public class Patrol : MonoBehaviour
         }
 
         isWaiting = false;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 

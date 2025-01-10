@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chase : MonoBehaviour
 {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,9 @@ public class Chase : MonoBehaviour
     {
         
     }
+=======
+     
+>>>>>>> Stashed changes
 =======
      
 >>>>>>> Stashed changes

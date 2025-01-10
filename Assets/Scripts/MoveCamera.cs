@@ -7,6 +7,7 @@ public class MoveCamera : MonoBehaviour
 
     public Transform cameraPosition;
 
+
     // Update
 
     private void Update()

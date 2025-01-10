@@ -70,11 +70,13 @@ public class PlayerMovement : MonoBehaviour
         controls.Enable();
     }
 
+
     // Disables Controls    
     private void OnDisable()
     {
         controls.Disable();
     }
+
 
     // Moves the player (set to fixed update so the player cant run faster on faster computers)
     private void FixedUpdate()
@@ -158,5 +160,4 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = baseMoveSpeed;
     }
-
 }

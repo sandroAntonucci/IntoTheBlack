@@ -27,12 +27,12 @@ public class PlayerMovement : MonoBehaviour
 
     private float moveSpeed;
 
+    public bool isRunning;
+
     private float horizontalInput;
     private float verticalInput;
 
-    private bool canRun;
-
-    private Vector3 moveDirection;
+    public Vector3 moveDirection;
 
     private Rigidbody rb;
 
@@ -57,7 +57,11 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Crouch.performed += ctx => Crouch();
         controls.Player.Crouch.canceled += ctx => StandUp();
         controls.Player.Run.started += ctx => StartRunning();
-        controls.Player.Run.canceled += ctx => StopRunning();
+        controls.Player.Run.canceled += ctx =>
+        {
+            isRunning = false;
+            StopRunning();
+        };
     }
 
     // Enables Controls
@@ -145,14 +149,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartRunning()
     {
-        playerStamina.StartConsumingStamina();
+        isRunning = true;
         baseMoveSpeed = moveSpeed;
         moveSpeed = runningSpeed;
     }
 
     public void StopRunning()
     {
-        playerStamina.StopConsumingStamina();
         moveSpeed = baseMoveSpeed;
     }
 

@@ -15,31 +15,16 @@ public class PlayerStamina : MonoBehaviour
 
     public bool hasStamina;
 
-    public bool isRunning = false;
-
     private void Start()
     {
         currentStamina = maxStamina;
     }
 
-    // Called when the player starts running
-    public void StartConsumingStamina()
-    {
-        isRunning = true;
-    }
-
-    // Called when the player stops running
-    public void StopConsumingStamina()
-    {
-        isRunning = false;
-    }
 
     // Updates current stamina based on running state
     private void Update()
     {
-        Debug.Log("Current Stamina: " + currentStamina);
-
-        if (isRunning)
+        if (playerMovement.isRunning && playerMovement.moveDirection != Vector3.zero)
         {
             UseStamina();
 
@@ -50,6 +35,8 @@ public class PlayerStamina : MonoBehaviour
         {
             RecoverStamina();
         }
+
+        PlayerInterface.Instance.UpdateStaminaInterface(currentStamina, maxStamina);
     }
 
     // Uses stamina when running
@@ -58,6 +45,7 @@ public class PlayerStamina : MonoBehaviour
         if (currentStamina > 0)
         {
             currentStamina -= staminaUseRate * Time.deltaTime;
+            currentStamina = Mathf.Max(currentStamina, 0);
         }
     }
 
@@ -67,6 +55,7 @@ public class PlayerStamina : MonoBehaviour
         if (currentStamina < maxStamina)
         {
             currentStamina += staminaRecoveryRate * Time.deltaTime;
+            currentStamina = Mathf.Min(currentStamina, maxStamina);
         }
     }
 

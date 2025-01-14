@@ -122,7 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
-
 --- !u!1001 &115371108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,7 +266,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-
   m_SourcePrefab: {fileID: 100100000, guid: 2f9ac039a10be514dbfc03631d59a9c0, type: 3}
 --- !u!1 &126831111
 GameObject:
@@ -277,7 +275,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-
   - component: {fileID: 126831112}
   - component: {fileID: 126831115}
   - component: {fileID: 126831114}
@@ -290,7 +287,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-
 --- !u!4 &126831112
 Transform:
   m_ObjectHideFlags: 0
@@ -327,7 +323,6 @@ AudioListener:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-
   m_GameObject: {fileID: 126831111}
   m_Enabled: 1
 --- !u!20 &126831115
@@ -381,7 +376,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-
 --- !u!114 &126831116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,7 +388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
   volumeTrigger: {fileID: 126831112}
   volumeLayer:
     serializedVersion: 2
@@ -451,7 +444,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-
   - component: {fileID: 435806520}
   - component: {fileID: 435806519}
   - component: {fileID: 435806518}
@@ -825,7 +817,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-
   m_GameObject: {fileID: 1305180347}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -976,7 +967,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-
   - {fileID: 1289740091}
   - {fileID: 115371108}
   - {fileID: 1364725073}

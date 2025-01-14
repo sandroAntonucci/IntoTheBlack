@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private PlayerStamina playerStamina;
 
+    [SerializeField] private AudioSource walkSFX;
+    private float footstepSpeedMulplier = 1f;
+
     private bool isCrouching = false;
 
     private float moveSpeed;
@@ -103,9 +106,29 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
+        PlayFootstepsSFX();
+
         float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
 
         rb.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
+    }
+
+    private void PlayFootstepsSFX()
+    {
+
+        if(moveDirection != Vector3.zero)
+        {
+            if (!walkSFX.isPlaying)
+            {
+                walkSFX.Play();
+
+            }
+        }
+        else
+        {
+            walkSFX.Stop();
+        }
+
     }
 
     // Limits the player's speed
@@ -127,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
         if (isCrouching) return;
 
         isCrouching = true;
+        footstepSpeedMulplier = 0.5f;
 
         // Reduce the player's height
         playerModel.transform.localScale = new Vector3(transform.localScale.x, crouchHeight, transform.localScale.z);
@@ -141,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isCrouching) return;
 
         isCrouching = false;
+        footstepSpeedMulplier = 1f;
 
         // Restore the player's height
         playerModel.transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
@@ -152,12 +177,14 @@ public class PlayerMovement : MonoBehaviour
     private void StartRunning()
     {
         isRunning = true;
+        footstepSpeedMulplier = 1.5f;
         baseMoveSpeed = moveSpeed;
         moveSpeed = runningSpeed;
     }
 
     public void StopRunning()
     {
+        footstepSpeedMulplier = 1f;
         moveSpeed = baseMoveSpeed;
     }
 }

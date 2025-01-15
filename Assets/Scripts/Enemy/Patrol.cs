@@ -7,7 +7,7 @@ public class Patrol : MonoBehaviour
 {
     private const string ParamWalk = "Walk", ParamRun = "Run";
 
-    private const int doubleValue = 1;
+    private const int doubleValue = 2;
     private const float minRemainingDistance = 0.5f;
 
     public float speed = 1;     
@@ -45,6 +45,7 @@ public class Patrol : MonoBehaviour
         }
         else
         {
+            agent.speed = speed;
             animator.SetBool(ParamRun, false);
         }
 
@@ -52,24 +53,23 @@ public class Patrol : MonoBehaviour
         {
             StartCoroutine(WaitBeforeNextDestination());  // Llama la corutina para esperar
         }
+        agent.isStopped = isWaiting;
     }
 
     private IEnumerator WaitBeforeNextDestination()
     {
         isWaiting = true;
         animator.SetBool(ParamWalk, false);
+
         yield return new WaitForSeconds(waitTime);
 
+        isWaiting = false;
         Transform newDestination = GetNewWaypoint(waypoints);
         agent.SetDestination(newDestination.position);
-        agent.speed = agent.speed == speed ? speed : speed / doubleValue;
 
-        while (agent.remainingDistance > minRemainingDistance)
-        {
-            animator.SetBool(ParamWalk, true);
-            yield return null; 
-        }
+        Debug.Log(newDestination.name);
 
+        animator.SetBool(ParamWalk, true);
         isWaiting = false;
     }
 

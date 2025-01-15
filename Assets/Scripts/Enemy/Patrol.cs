@@ -40,6 +40,7 @@ public class Patrol : MonoBehaviour
             agent.SetDestination(target.transform.position);
             agent.speed = speed * doubleValue; // Aumenta su velocidad
             animator.SetBool(ParamRun, true);
+            animator.SetBool(ParamWalk, true);
             return;
         }
         else

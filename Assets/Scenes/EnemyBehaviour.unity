@@ -838,13 +838,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138000062}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.61221683, y: -0, z: -0, w: 0.79068995}
+  m_LocalPosition: {x: -0.11, y: 7.36, z: -2.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 75.5, y: 0, z: 0}
 --- !u!1 &1247983933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,29 +1043,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1247983934}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1604409765 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6228655420941122456, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
-  m_PrefabInstance: {fileID: 3838219539043038491}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1604409767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1604409765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1f2a108314a3c542b8f0ef54b2986d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1533090455}
-  visionRange: 8
-  visionAngle: 90
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &1662531417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1119,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4f61cfb2eac22df4f9c36da14aec4d60, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1215,6 +1192,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1533090455}
+    - target: {fileID: 2996307977363221243, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1533090455}
     - target: {fileID: 3836205300449204737, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
       propertyPath: m_Name
       value: BabyMonster
@@ -1259,6 +1240,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4831846282719178041, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0a509f347b987d842a79f00c314e4557, type: 2}
     - target: {fileID: 7454430084991122524, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
       propertyPath: target
       value: 
@@ -1291,10 +1276,7 @@ PrefabInstance:
     - {fileID: 1671250612683038102, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6228655420941122456, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1604409767}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

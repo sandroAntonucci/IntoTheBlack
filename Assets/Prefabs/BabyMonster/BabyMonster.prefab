@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1458832260804016251}
-  - component: {fileID: 1671250612683038102}
+  - component: {fileID: 2996307977363221243}
   m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4501102403731226811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1671250612683038102
+--- !u!114 &2996307977363221243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,11 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6228655420941122456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c74a2b2d1c4b7f946872b6c171b8ac18, type: 3}
+  m_Script: {fileID: 11500000, guid: f1f2a108314a3c542b8f0ef54b2986d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  visionRange: 8
+  visionRange: 10
   visionAngle: 90
   obstacleLayer:
     serializedVersion: 2
@@ -105,11 +105,11 @@ PrefabInstance:
     - target: {fileID: 1136686147692683889, guid: f7a1b526a01b71e4d95a23563a957e8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f1d3e662e37c0084bb5582588f3a7c18, type: 2}
+      objectReference: {fileID: 2100000, guid: e91a66834b635e34f8d7962616094b79, type: 2}
     - target: {fileID: 2152169942456128629, guid: f7a1b526a01b71e4d95a23563a957e8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f1d3e662e37c0084bb5582588f3a7c18, type: 2}
+      objectReference: {fileID: 2100000, guid: e91a66834b635e34f8d7962616094b79, type: 2}
     - target: {fileID: 3670865994064305094, guid: f7a1b526a01b71e4d95a23563a957e8f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.029
@@ -117,15 +117,15 @@ PrefabInstance:
     - target: {fileID: 4574719093219693878, guid: f7a1b526a01b71e4d95a23563a957e8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f1d3e662e37c0084bb5582588f3a7c18, type: 2}
+      objectReference: {fileID: 2100000, guid: e91a66834b635e34f8d7962616094b79, type: 2}
     - target: {fileID: 4726589800292863981, guid: f7a1b526a01b71e4d95a23563a957e8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f1d3e662e37c0084bb5582588f3a7c18, type: 2}
+      objectReference: {fileID: 2100000, guid: e91a66834b635e34f8d7962616094b79, type: 2}
     - target: {fileID: 8979000959227449217, guid: f7a1b526a01b71e4d95a23563a957e8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f1d3e662e37c0084bb5582588f3a7c18, type: 2}
+      objectReference: {fileID: 2100000, guid: e91a66834b635e34f8d7962616094b79, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

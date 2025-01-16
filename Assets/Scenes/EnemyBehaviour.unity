@@ -237,7 +237,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1354423276548055008, guid: 2f9ac039a10be514dbfc03631d59a9c0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1873633056143391677, guid: 2f9ac039a10be514dbfc03631d59a9c0, type: 3}
       propertyPath: m_IsActive
@@ -1726,6 +1726,7 @@ MonoBehaviour:
   playerModel: {fileID: 1361260625}
   orientation: {fileID: 1209699090}
   playerStamina: {fileID: 0}
+  walkSFX: {fileID: 0}
   isRunning: 0
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!54 &1460896286
@@ -1918,7 +1919,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1985,7 +1986,7 @@ Transform:
   m_GameObject: {fileID: 1533090450}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.98, y: 0.419, z: 10.17}
+  m_LocalPosition: {x: 1.14, y: 1.35, z: 6.29}
   m_LocalScale: {x: 0.503918, y: 0.503918, z: 0.503918}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2369,7 +2370,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2996307977363221243, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
+    - target: {fileID: 1376419765027737713, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1533090455}
@@ -2417,6 +2418,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6772449391058204333, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1533090450}
     - target: {fileID: 7454430084991122524, guid: dc85a1e4ed51c8f4eaafb44fd7badbf3, type: 3}
       propertyPath: target
       value: 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Patrol : MonoBehaviour
+public class PatrolBehaviour : MonoBehaviour
 {
     private const string ParamWalk = "Walk", ParamRun = "Run";
 

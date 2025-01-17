@@ -1,72 +1,57 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
-// Can't be a static class because it needs to preserve variables about the audio source
 public class AudioManager : MonoBehaviour
 {
 
-    public AudioSource audioSource;
+    public AudioSource audioPlayed;
+    public AudioClip[] clips;
+    private Coroutine playSoundCoroutine;
+    private bool isPlaying;
 
-    public bool isFadingOut = false;
-    public bool isFadingIn = false;
-
-    public void FadeOut(float fadeDuration, bool stopsAudio)
+    public IEnumerator PlayRandomSound()
     {
-        if (audioSource.isPlaying == false)
-        {
-            return;
-        }
-        StartCoroutine(FadeOutCoroutine(audioSource, fadeDuration, stopsAudio));
-    }
+        if (isPlaying) yield break;  // Prevent multiple starts
 
-    public void FadeIn(float fadeDuration = 0.5f)
-    {
-        if (audioSource.isPlaying == true)
-        {
-            return;
-        }
-        StartCoroutine(FadeInCoroutine(audioSource, fadeDuration));
-    }
-    
-    private IEnumerator FadeOutCoroutine(AudioSource audioSource, float fadeDuration, bool stopsAudio)
-    {
-        float startVolume = audioSource.volume;
+        isPlaying = true;
 
-        isFadingIn = false;
-        isFadingOut = true;
-
-        while (audioSource.volume > 0)
+        while (isPlaying)
         {
-            audioSource.volume -= startVolume * Time.deltaTime / fadeDuration;
-            yield return null;
+            int randomIndex = Random.Range(0, clips.Length);
+            AudioClip clip = clips[randomIndex];
+
+            audioPlayed.clip = clip;
+            audioPlayed.Play();
+
+            yield return new WaitForSeconds(clip.length);
         }
 
-        isFadingOut = false;
-
-        if (stopsAudio) audioSource.Stop();
-        else audioSource.Pause();
-
-        audioSource.volume = startVolume; // Reset volume if needed
+        isPlaying = false;  // Reset when finished
     }
 
-    private IEnumerator FadeInCoroutine(AudioSource audioSource, float fadeDuration)
+    public void StartRandomSound()
     {
-        audioSource.volume = 0f;
-        audioSource.Play();
-
-        isFadingOut = false;
-        isFadingIn = true;
-
-        float targetVolume = 1f; // You can change this to a desired max volume
-
-        while (audioSource.volume < targetVolume)
+        if (playSoundCoroutine == null)
         {
-            audioSource.volume += Time.deltaTime / fadeDuration;
-            yield return null;
+            playSoundCoroutine = StartCoroutine(PlayRandomSound());
+        }
+    }
+
+    public void StopRandomSound()
+    {
+        if (playSoundCoroutine != null)
+        {
+            StopCoroutine(playSoundCoroutine);
+            playSoundCoroutine = null;
         }
 
-        isFadingIn = false;
+        if (audioPlayed.isPlaying)
+        {
+            audioPlayed.Stop();
+        }
 
-        audioSource.volume = targetVolume; // Ensure volume is set exactly to the target
+        isPlaying = false;
     }
+
+
 }

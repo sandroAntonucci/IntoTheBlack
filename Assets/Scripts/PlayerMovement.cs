@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private PlayerStamina playerStamina;
 
-    [SerializeField] private AudioSource walkSFX;
+    [SerializeField] private AudioManager walkSFX;
 
     private bool isCrouching = false;
 
@@ -54,8 +54,20 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = baseMoveSpeed;
 
         // Bind input actions
-        controls.Player.Move.performed += ctx => MyInput(ctx);
-        controls.Player.Move.canceled += ctx => MyInput(ctx);
+        controls.Player.Move.performed += ctx =>
+        {
+            MyInput(ctx);
+
+            walkSFX.StartRandomSound();
+        };
+
+        controls.Player.Move.canceled += ctx =>
+        {
+            walkSFX.StopRandomSound();
+            MyInput(ctx);
+        };
+
+
         controls.Player.Crouch.performed += ctx => Crouch();
         controls.Player.Crouch.canceled += ctx => StandUp();
         controls.Player.Run.started += ctx => StartRunning();
@@ -72,13 +84,11 @@ public class PlayerMovement : MonoBehaviour
         controls.Enable();
     }
 
-
     // Disables Controls    
     private void OnDisable()
     {
         controls.Disable();
     }
-
 
     // Moves the player (set to fixed update so the player cant run faster on faster computers)
     private void FixedUpdate()
@@ -105,25 +115,9 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        PlayFootstepsSFX();
-
         float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
 
         rb.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
-    }
-
-    private void PlayFootstepsSFX()
-    {
-
-        if(rb.velocity != Vector3.zero)
-        {
-            walkSFX.enabled = true;
-        }
-        else
-        {
-            walkSFX.enabled = false;
-        }
-
     }
 
     // Limits the player's speed
@@ -177,4 +171,5 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = baseMoveSpeed;
     }
+
 }

@@ -11,6 +11,7 @@ public class FrightBehaviour : MonoBehaviour
 
     private void Update()
     {
+        // PRUEBA DE QUE FUNCIONE
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(ActivateEnemyCamera());
@@ -27,11 +28,6 @@ public class FrightBehaviour : MonoBehaviour
 
         Time.timeScale = 1;
         frightCamera.gameObject.SetActive(false);
-    }
-
-    private Camera GetTargetCamera(GameObject target)
-    {
-        return target.GetComponent<Camera>();
     }
 
     private void OnCollisionEnter(Collision collision)

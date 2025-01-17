@@ -64,23 +64,28 @@ public class PatrolBehaviour : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
 
         isWaiting = false;
-        Transform newDestination = GetNewWaypoint(waypoints);
+        TeleportToWaypoint();
+        animator.SetBool(ParamWalk, true);
+    }
+
+    private void TeleportToWaypoint()
+    {
+        // Se teletransporta a un nuevo lugar
+        Transform teleport = GetRandomWaypoint(waypoints);
+        transform.position = teleport.position;
+
+        Debug.Log($"TELEPORT: {teleport.name}");
+
+        // Se mueve hacia ese destino
+        Transform newDestination = GetRandomWaypoint(waypoints);
         agent.SetDestination(newDestination.position);
 
-        Debug.Log(newDestination.name);
-
-        animator.SetBool(ParamWalk, true);
-        isWaiting = false;
+        Debug.Log($"DESTINATION: {newDestination.name}");
     }
 
-    private Transform GetNewWaypoint(List<Transform> waypoints)
+    private Transform GetRandomWaypoint(List<Transform> waypoints)
     {
-        int index = GetRandomInt(0, waypoints.Count);
+        int index = Random.Range(0, waypoints.Count);
         return waypoints[index];
-    }
-
-    private int GetRandomInt(int min, int max)
-    {
-        return Random.Range(min, max);
     }
 }

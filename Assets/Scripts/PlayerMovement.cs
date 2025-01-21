@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private PlayerStamina playerStamina;
 
+    [SerializeField] private AudioManager walkSFX;
+
     private bool isCrouching = false;
 
     private float moveSpeed;
@@ -52,8 +54,20 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = baseMoveSpeed;
 
         // Bind input actions
-        controls.Player.Move.performed += ctx => MyInput(ctx);
-        controls.Player.Move.canceled += ctx => MyInput(ctx);
+        controls.Player.Move.performed += ctx =>
+        {
+            MyInput(ctx);
+
+            walkSFX.StartRandomSound();
+        };
+
+        controls.Player.Move.canceled += ctx =>
+        {
+            walkSFX.StopRandomSound();
+            MyInput(ctx);
+        };
+
+
         controls.Player.Crouch.performed += ctx => Crouch();
         controls.Player.Crouch.canceled += ctx => StandUp();
         controls.Player.Run.started += ctx => StartRunning();
@@ -70,13 +84,11 @@ public class PlayerMovement : MonoBehaviour
         controls.Enable();
     }
 
-
     // Disables Controls    
     private void OnDisable()
     {
         controls.Disable();
     }
-
 
     // Moves the player (set to fixed update so the player cant run faster on faster computers)
     private void FixedUpdate()
@@ -141,7 +153,6 @@ public class PlayerMovement : MonoBehaviour
         if (!isCrouching) return;
 
         isCrouching = false;
-
         // Restore the player's height
         playerModel.transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
 
@@ -160,4 +171,5 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = baseMoveSpeed;
     }
+
 }

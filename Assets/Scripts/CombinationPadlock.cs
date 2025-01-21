@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CombinationPadlock : MonoBehaviour
 {
+    private const string PlayerTag = "Player";
+
     [SerializeField] private GameObject puzzleScreen;
     [SerializeField] private Camera focusCamera;
     [SerializeField] private int[] secretCode;
@@ -42,13 +44,14 @@ public class CombinationPadlock : MonoBehaviour
         return true;
     }
 
+    // Metodo llamado a través de la animacion
     public void ExitPadlock()
     {
         if (puzzleScreen.activeSelf == true)
             puzzleScreen.SetActive(false);
 
-        if (focusCamera.enabled == true)
-            focusCamera.enabled = false;
+        if (focusCamera.gameObject.activeSelf == true)
+            focusCamera.gameObject.SetActive(false);
     }
 
     private IEnumerator OpenPadlock()
@@ -59,11 +62,11 @@ public class CombinationPadlock : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player") 
+        if (other.gameObject.CompareTag(PlayerTag)) 
         {
             if (Input.GetKeyUp(KeyCode.E))
             {
-                focusCamera.enabled = true;
+                focusCamera.gameObject.SetActive(true);
                 puzzleScreen.SetActive(true);
                 StartCoroutine(OpenPadlock());
             }

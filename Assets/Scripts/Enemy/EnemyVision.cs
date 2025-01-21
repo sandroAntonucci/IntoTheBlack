@@ -15,6 +15,7 @@ public class EnemyVision : MonoBehaviour
     void Update()
     {
         DetectPlayer();
+        Debug.Log(playerInSight);
     }
 
     void DetectPlayer()

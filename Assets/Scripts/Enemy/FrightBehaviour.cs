@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class FrightBehaviour : MonoBehaviour
 {
+    private const string PlayerTag = "Player";
     private const float time = 1f;
-
-    public GameObject target;
     public Camera frightCamera;
 
     private void Update()
     {
-        // PRUEBA DE QUE FUNCIONE
+        //PRUEBA DE QUE FUNCIONE
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(ActivateEnemyCamera());
@@ -32,7 +31,7 @@ public class FrightBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == target.tag)
+        if (collision.gameObject.CompareTag(PlayerTag))
         {
             StartCoroutine(ActivateEnemyCamera());
         }

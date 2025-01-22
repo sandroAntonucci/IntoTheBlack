@@ -44,6 +44,15 @@ public class CombinationPadlock : MonoBehaviour
         return true;
     }
 
+
+
+
+
+
+
+
+
+
     // Metodo llamado a través de la animacion
     public void ExitPadlock()
     {
@@ -52,10 +61,23 @@ public class CombinationPadlock : MonoBehaviour
 
         if (focusCamera.gameObject.activeSelf == true)
             focusCamera.gameObject.SetActive(false);
+
+        // Ocultar el cursor y bloquearlo de nuevo
+        Cursor.lockState = CursorLockMode.Locked;  // Bloquear el cursor al centro
+        Cursor.visible = false;  // Hacer invisible el cursor
+
+        Destroy(gameObject);
     }
 
     private IEnumerator OpenPadlock()
     {
+        focusCamera.gameObject.SetActive(true);
+        puzzleScreen.SetActive(true);
+
+        // Activar el cursor
+        Cursor.lockState = CursorLockMode.None;  // Desbloquear el cursor
+        Cursor.visible = true;  // Hacer visible el cursor
+
         yield return new WaitForSeconds(1f);
         animator.SetTrigger("Open");
     }
@@ -66,8 +88,6 @@ public class CombinationPadlock : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.E))
             {
-                focusCamera.gameObject.SetActive(true);
-                puzzleScreen.SetActive(true);
                 StartCoroutine(OpenPadlock());
             }
         }                                

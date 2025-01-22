@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
 
+    [SerializeField] private float maxSlopeAngle = 45f;
+    private RaycastHit hitInfo;
 
     // Creates a new instance of the PlayerControls class
     private void Awake()
@@ -113,11 +115,22 @@ public class PlayerMovement : MonoBehaviour
     // Moves the player based on the inputs from the player
     private void MovePlayer()
     {
+        // Calculamos la dirección de movimiento según la entrada del jugador
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        float currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
+        // Si la pendiente es suave, agregamos un pequeño impulso hacia arriba
+        if (Vector3.Angle(hitInfo.normal, Vector3.up) < maxSlopeAngle)
+        {
+            // Aseguramos que el jugador se mueve hacia arriba un poco
+            Vector3 verticalPush = hitInfo.normal * (verticalInput > 0 ? 0.5f : 0);  // Ajustar el valor según sea necesario
 
-        rb.AddForce(moveDirection.normalized * currentSpeed * 10f, ForceMode.Force);
+            // Aplicamos el movimiento con la dirección de la pendiente y el pequeño empuje vertical
+            rb.AddForce((moveDirection + verticalPush).normalized * moveSpeed * 10f, ForceMode.Force);
+        }
+        else
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        }
     }
 
     // Limits the player's speed

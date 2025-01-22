@@ -33,6 +33,7 @@ public class FrightBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(PlayerTag))
         {
+            StopCoroutine(ActivateEnemyCamera());
             StartCoroutine(ActivateEnemyCamera());
         }
     }

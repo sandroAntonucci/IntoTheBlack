@@ -32940,7 +32940,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1876553855355030995}
-  - component: {fileID: 1792087478257036825}
   - component: {fileID: 1875161217143255992}
   m_Layer: 0
   m_Name: DoorEntry_L_LOD
@@ -32967,30 +32966,6 @@ Transform:
   - {fileID: 1879217371680049985}
   m_Father: {fileID: 1876665681830261705}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &1792087478257036825
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875259775736363093}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.5107119, y: 1.4412423, z: -0.005721584}
-  m_Size: 2.9106257
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.40294734
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 1898250957344212075}
-    - renderer: {fileID: 1897755948781898329}
-  - screenRelativeHeight: 0.043861594
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 1897710119649851433}
-  m_Enabled: 1
 --- !u!114 &1875161217143255992
 MonoBehaviour:
   m_ObjectHideFlags: 0

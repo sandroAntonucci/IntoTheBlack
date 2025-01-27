@@ -2538,19 +2538,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleScreen: {fileID: 540355979}
   focusCamera: {fileID: 1667986473}
-  secretCode: 0000000000000000000000000000000000000000
+  secretCode: 0300000001000000080000000600000007000000
   buttonsAdd:
-  - {fileID: 477347758}
-  - {fileID: 503121451}
-  - {fileID: 267104563}
-  - {fileID: 2062513590}
-  - {fileID: 1989650090}
-  buttonsSubstract:
   - {fileID: 1866013509}
   - {fileID: 1982997366}
   - {fileID: 1141166230}
   - {fileID: 1803474988}
   - {fileID: 1828465867}
+  buttonsSubstract:
+  - {fileID: 477347758}
+  - {fileID: 503121451}
+  - {fileID: 267104563}
+  - {fileID: 2062513590}
+  - {fileID: 1989650090}
   numbers:
   - {fileID: 1963401290}
   - {fileID: 1963401289}

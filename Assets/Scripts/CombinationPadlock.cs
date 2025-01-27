@@ -54,7 +54,6 @@ public class CombinationPadlock : MonoBehaviour
         Quaternion currentRotation = targetTransform.rotation;
 
         // Calculate the desired rotation
-
         float rotationAmount = 0;
 
         if (addNum)
@@ -72,7 +71,7 @@ public class CombinationPadlock : MonoBehaviour
         Quaternion desiredRotation = currentRotation * Quaternion.Euler(rotationAmount, 0, 0);
 
         // Start the rotation coroutine
-        StartCoroutine(RotateOverTime(targetTransform, currentRotation, desiredRotation, 0.1f)); // 0.5f is the duration
+        StartCoroutine(RotateOverTime(targetTransform, currentRotation, desiredRotation, 0.1f)); 
     }
 
     private IEnumerator RotateOverTime(Transform target, Quaternion startRotation, Quaternion endRotation, float duration)
@@ -96,38 +95,24 @@ public class CombinationPadlock : MonoBehaviour
     public void CheckPassword()
     {
 
+        bool isCorrect = true;
+
         for (int i = 0; i < inputCode.Length; i++)
         {
-            Debug.Log(inputCode[i]);
-        }
-
-
-            /*
-            // Verificar que la longitud de la contraseña sea la misma que el código secreto
-            if (password.Length != secretCode.Length)
+            if (inputCode[i] != secretCode[i])
             {
                 isCorrect = false;
-                return;
+                animator.Play("CombinationPadlock_error");  
+                break;
             }
-            isCorrect = SearchForIncorrectValue(secretCode, password);
-            */
         }
 
-    private bool SearchForIncorrectValue(int[] correctPassword, string inputPassword)
-    {
-        int i = 0;
-
-        while (i < correctPassword.Length)
+        if (isCorrect)
         {
-            // Intentamos convertir cada caracter de la contraseña en un número
-            if (!int.TryParse(inputPassword[i].ToString(), out int passwordDigit) || correctPassword[i] != passwordDigit)
-            {
-                return false;  // Si no coincide, la contraseña es incorrecta
-            }
-            i++;
+            animator.Play("CombinationPadlock_open");
         }
 
-        return true;
+
     }
 
     // Metodo llamado a través de la animacion

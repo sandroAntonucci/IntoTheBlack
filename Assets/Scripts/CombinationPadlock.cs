@@ -49,6 +49,7 @@ public class CombinationPadlock : MonoBehaviour
 
     public void ChangeNumber(int position, bool addNum)
     {
+
         // Get the current rotation of the object
         Transform targetTransform = numbers[position].transform;
         Quaternion currentRotation = targetTransform.rotation;
@@ -128,6 +129,8 @@ public class CombinationPadlock : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;  // Bloquear el cursor al centro
         Cursor.visible = false;  // Hacer invisible el cursor
 
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+
         Destroy(gameObject);
     }
 
@@ -135,6 +138,8 @@ public class CombinationPadlock : MonoBehaviour
     {
         focusCamera.gameObject.SetActive(true);
         puzzleScreen.SetActive(true);
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
 
         // Activar el cursor
         Cursor.lockState = CursorLockMode.None;  // Desbloquear el cursor

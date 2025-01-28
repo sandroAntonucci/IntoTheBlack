@@ -149,6 +149,7 @@ public class CombinationPadlock : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.E))
             {
+                Debug.Log("This is executed");
                 StartCoroutine(OpenPadlock());
             }
         }                                

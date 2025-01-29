@@ -9,7 +9,11 @@ public class CombinationPadlock : MonoBehaviour
     private const string PlayerTag = "Player";
 
     [SerializeField] private GameObject puzzleScreen;
-    [SerializeField] private Camera focusCamera;
+    [SerializeField] private GameObject focusCamera;
+    [SerializeField] private GameObject focusLight;
+    [SerializeField] private GameObject textToPlayer;
+
+    [SerializeField] private GameObject door;
 
     [SerializeField] private int[] secretCode;
 
@@ -20,7 +24,10 @@ public class CombinationPadlock : MonoBehaviour
 
     private int[] inputCode;
     private Animator animator;
-    private bool isCorrect = false;
+
+    private bool correctCode = false;
+    private bool playerCanInteract = false;
+    private bool playerIsInteracting = false;
 
     private void Start()
     {
@@ -92,7 +99,6 @@ public class CombinationPadlock : MonoBehaviour
         target.rotation = endRotation;
     }
 
-
     public void CheckPassword()
     {
 
@@ -111,6 +117,7 @@ public class CombinationPadlock : MonoBehaviour
         if (isCorrect)
         {
             animator.Play("CombinationPadlock_open");
+            correctCode = true;
         }
 
 
@@ -122,8 +129,14 @@ public class CombinationPadlock : MonoBehaviour
         if (puzzleScreen.activeSelf == true)
             puzzleScreen.SetActive(false);
 
-        if (focusCamera.gameObject.activeSelf == true)
-            focusCamera.gameObject.SetActive(false);
+        if (focusCamera.activeSelf == true)
+            focusCamera.SetActive(false);
+
+        if (focusLight.activeSelf == true)
+            focusLight.SetActive(false);
+
+        if (textToPlayer.activeSelf == false)
+            textToPlayer.SetActive(true);
 
         // Ocultar el cursor y bloquearlo de nuevo
         Cursor.lockState = CursorLockMode.Locked;  // Bloquear el cursor al centro
@@ -131,13 +144,19 @@ public class CombinationPadlock : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
 
-        Destroy(gameObject);
+        if (correctCode)
+        {
+            Destroy(gameObject);
+            door.GetComponent<Animator>().Play("Door_Open");
+        }
     }
 
     private IEnumerator OpenPadlock()
     {
-        focusCamera.gameObject.SetActive(true);
+        focusCamera.SetActive(true);
         puzzleScreen.SetActive(true);
+        focusLight.SetActive(true);
+        textToPlayer.SetActive(false);
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
 
@@ -148,15 +167,40 @@ public class CombinationPadlock : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(PlayerTag)) 
         {
-            if (Input.GetKeyUp(KeyCode.E))
-            {
-                Debug.Log("This is executed");
-                StartCoroutine(OpenPadlock());
-            }
+            textToPlayer.SetActive(true);
+            playerCanInteract = true;
         }                                
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag(PlayerTag))
+        {
+            textToPlayer.SetActive(false);
+            playerCanInteract = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (playerCanInteract && Input.GetKeyDown(KeyCode.E) && !playerIsInteracting)
+        {
+            playerIsInteracting = true;
+            StartCoroutine(OpenPadlock());
+        }
+
+        else if (playerIsInteracting && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)))
+        {
+            playerIsInteracting = false;
+            ExitPadlock();
+        }
+
+
+
+    }
+
 }

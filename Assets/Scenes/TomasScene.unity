@@ -2264,8 +2264,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPosition: {fileID: 562068324}
   player: {fileID: 1206059642}
-  bobFrequency: 1.5
-  bobAmplitude: 0.15
+  bobFrequency: 3
+  bobAmplitude: 0.05
 --- !u!4 &415000736
 Transform:
   m_ObjectHideFlags: 0
@@ -5283,16 +5283,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: crouchSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: crouchHeight
       value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: runningSpeed
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: baseMoveSpeed
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: maxSlopeAngle
@@ -5377,6 +5381,14 @@ PrefabInstance:
     - target: {fileID: 7676111662018526169, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.362
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895715285918381481, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895715285918381481, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7949,6 +7961,18 @@ PrefabInstance:
     - target: {fileID: 1879637341744137193, guid: 2f9ac039a10be514dbfc03631d59a9c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 95.594
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531290135869678017, guid: 2f9ac039a10be514dbfc03631d59a9c0, type: 3}
+      propertyPath: m_Size.z
+      value: 4.091235
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531290135869678017, guid: 2f9ac039a10be514dbfc03631d59a9c0, type: 3}
+      propertyPath: m_Center.y
+      value: -0.44702393
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531290135869678017, guid: 2f9ac039a10be514dbfc03631d59a9c0, type: 3}
+      propertyPath: m_Center.z
+      value: 0.6969683
       objectReference: {fileID: 0}
     - target: {fileID: 5481483732868109627, guid: 2f9ac039a10be514dbfc03631d59a9c0, type: 3}
       propertyPath: m_LocalPosition.x

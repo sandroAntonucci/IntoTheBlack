@@ -1,42 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCamera : MonoBehaviour
+public class CameraBob : MonoBehaviour
 {
-    public Transform cameraPosition;
-    public Transform player; // Reference to the player object
-
+    public Transform player;  // Assign the player's transform
     public float bobFrequency = 6f; // Speed of the bobbing effect
-    public float bobAmplitude = 0.3f; // Height of the bobbing effect
-
-    float bobOffset = 0f;
-
+    public float bobAmplitude = 0.1f; // Height of the bobbing effect
     private float timer = 0f;
     private Vector3 originalPosition;
 
-    private void Start()
+    void Start()
     {
         originalPosition = transform.localPosition; // Store the original local position of the camera
     }
 
-    private void Update()
-    {
-        HandleHeadBobbing();
-        transform.position = new Vector3(cameraPosition.position.x, cameraPosition.position.y + bobOffset, cameraPosition.position.z);
-    }
-
-    private void HandleHeadBobbing()
+    void Update()
     {
         if (player == null) return;
 
-        // Get player's movement speed (assumes Rigidbody movement)
+        // Get player's movement speed
         float speed = player.GetComponent<Rigidbody>().velocity.magnitude;
 
         if (speed > 0.1f) // Only bob if the player is moving
         {
             timer += Time.deltaTime * bobFrequency * speed; // Scale bobbing with speed
-            bobOffset = Mathf.Sin(timer) * bobAmplitude;
+            float bobOffset = Mathf.Sin(timer) * bobAmplitude;
+            transform.localPosition = originalPosition + new Vector3(0, bobOffset, 0);
         }
         else
         {

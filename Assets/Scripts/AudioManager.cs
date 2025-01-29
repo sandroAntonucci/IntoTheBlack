@@ -7,8 +7,6 @@ public class AudioManager : MonoBehaviour
     public AudioSource audioPlayed;
     public AudioClip[] clips;
 
-    [Serialize]
-
     private Coroutine playSoundCoroutine;
     private bool isPlaying;
 

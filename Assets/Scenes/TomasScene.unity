@@ -11681,6 +11681,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: LockedDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 3022748309089588499, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022748309089588499, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022748309089588499, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5609565483411830939, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.375004
@@ -11719,6 +11731,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5609565483411830939, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833597899899909996, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8741312039506679187, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

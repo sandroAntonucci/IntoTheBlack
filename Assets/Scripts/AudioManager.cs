@@ -7,6 +7,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource audioPlayed;
     public AudioClip[] clips;
 
+    public bool variableVelocity = false;
+    public float velocityMultiplier;
+
     private Coroutine playSoundCoroutine;
     private bool isPlaying;
 
@@ -24,10 +27,23 @@ public class AudioManager : MonoBehaviour
             audioPlayed.clip = clip;
             audioPlayed.Play();
 
-            yield return new WaitForSeconds(clip.length);
+            yield return new WaitUntil(() => !audioPlayed.isPlaying);
         }
 
         isPlaying = false;  // Reset when finished
+    }
+
+    public void Update()
+    {
+        if (variableVelocity)
+        {
+            ChangePitch();
+        }
+    }
+
+    public void ChangePitch()
+    {
+        audioPlayed.pitch = velocityMultiplier;
     }
 
     public void StartRandomSound()

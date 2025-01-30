@@ -2264,7 +2264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPosition: {fileID: 562068324}
   player: {fileID: 1206059642}
-  bobFrequency: 3
+  bobFrequency: 2.85
   bobAmplitude: 0.05
 --- !u!4 &415000736
 Transform:
@@ -5282,6 +5282,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: crouchSpeed
       value: 1.5
@@ -5301,6 +5309,10 @@ PrefabInstance:
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: maxSlopeAngle
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420541268195127319, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: variableVelocity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5560713510968572225, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_LocalScale.x

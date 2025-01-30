@@ -59,13 +59,10 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.performed += ctx =>
         {
             MyInput(ctx);
-
-            walkSFX.StartRandomSound();
         };
 
         controls.Player.Move.canceled += ctx =>
         {
-            walkSFX.StopRandomSound();
             MyInput(ctx);
         };
 
@@ -84,12 +81,14 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         controls.Enable();
+        walkSFX.StartRandomSound();
     }
 
     // Disables Controls    
     private void OnDisable()
     {
         controls.Disable();
+        walkSFX.StopRandomSound();
     }
 
     // Moves the player (set to fixed update so the player cant run faster on faster computers)
@@ -102,31 +101,25 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         SpeedControl();
+        CrouchControl();
+    }
 
+    // Manages crouching
+    private void CrouchControl()
+    {
         if (isCrouching)
         {
-            // Reduce the player's height
             playerModel.transform.localScale = new Vector3(transform.localScale.x, crouchHeight, transform.localScale.z);
-
-            // Calculate the target position
             Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - (playerHeight - crouchHeight) / 2, transform.position.z);
-
-            // Move towards the target position smoothly
             playerModel.transform.position = Vector3.MoveTowards(playerModel.transform.position, targetPosition, 6f * Time.deltaTime);
         }
 
         else if (!isCrouching && playerModel.transform.localScale.y != playerHeight)
         {
-            // Restore the player's height
             playerModel.transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
-
-            // Raise the player's position slightly
             Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y + (playerHeight - crouchHeight) / 2, transform.position.z);
-
             playerModel.transform.position = Vector3.MoveTowards(playerModel.transform.position, targetPosition, 6f * Time.deltaTime);
         }
-
-
     }
 
     // Changes direction based on the inputs from the player
@@ -169,6 +162,9 @@ public class PlayerMovement : MonoBehaviour
             Vector3 limitedVel = flatVel.normalized * maxSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
+
+        walkSFX.velocityMultiplier = rb.velocity.magnitude / 4;
+
     }
 
     // Crouches the player

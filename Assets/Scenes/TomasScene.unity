@@ -2264,7 +2264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPosition: {fileID: 562068324}
   player: {fileID: 1206059642}
-  bobFrequency: 2.85
+  bobFrequency: 3
   bobAmplitude: 0.05
 --- !u!4 &415000736
 Transform:
@@ -5286,6 +5286,14 @@ PrefabInstance:
       propertyPath: m_Pitch
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 595043c438f545748a7b12b72d8a08fe, type: 3}
     - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 

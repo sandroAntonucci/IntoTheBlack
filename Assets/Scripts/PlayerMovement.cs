@@ -163,8 +163,6 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
 
-        walkSFX.velocityMultiplier = rb.velocity.magnitude / 4;
-
     }
 
     // Crouches the player

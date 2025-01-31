@@ -7,8 +7,8 @@ public class MoveCamera : MonoBehaviour
     public Transform cameraPosition;
     public Transform player; // Reference to the player object
 
-    public float bobFrequency = 6f; // Speed of the bobbing effect
-    public float bobAmplitude = 0.3f; // Height of the bobbing effect
+    public float bobFrequency = 3f; // Speed of the bobbing effect
+    public float bobAmplitude = 0.05f; // Height of the bobbing effect
 
     float bobOffset = 0f;
 

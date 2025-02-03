@@ -23,7 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private PlayerStamina playerStamina;
 
-    [SerializeField] private AudioManager walkSFX;
+    [SerializeField] private AudioManager footstepsSFX;
+
+    private bool isMoving = false;
 
     private bool isCrouching = false;
 
@@ -69,7 +71,12 @@ public class PlayerMovement : MonoBehaviour
 
         controls.Player.Crouch.performed += ctx => Crouch();
         controls.Player.Crouch.canceled += ctx => StandUp();
-        controls.Player.Run.started += ctx => StartRunning();
+
+        controls.Player.Run.started += ctx =>
+        {
+            StartRunning();
+        };
+
         controls.Player.Run.canceled += ctx =>
         {
             isRunning = false;
@@ -80,15 +87,15 @@ public class PlayerMovement : MonoBehaviour
     // Enables Controls
     private void OnEnable()
     {
+        MoveCamera.CameraAtLowestPoint += PlayFootstepsSFX;
         controls.Enable();
-        walkSFX.StartRandomSound();
     }
 
     // Disables Controls    
     private void OnDisable()
     {
+        MoveCamera.CameraAtLowestPoint -= PlayFootstepsSFX;
         controls.Disable();
-        walkSFX.StopRandomSound();
     }
 
     // Moves the player (set to fixed update so the player cant run faster on faster computers)
@@ -102,6 +109,11 @@ public class PlayerMovement : MonoBehaviour
     {
         SpeedControl();
         CrouchControl();
+    }
+
+    private void PlayFootstepsSFX()
+    {
+        footstepsSFX.PlayRandomSoundOnce();
     }
 
     // Manages crouching
@@ -156,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         float maxSpeed = isCrouching ? crouchSpeed : moveSpeed;
+
 
         if (flatVel.magnitude > maxSpeed)
         {

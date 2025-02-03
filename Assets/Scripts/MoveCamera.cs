@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class MoveCamera : MonoBehaviour
@@ -14,6 +15,9 @@ public class MoveCamera : MonoBehaviour
 
     private float timer = 0f;
     private Vector3 originalPosition;
+
+    private bool cameraAtLowestPoint = false;
+    public static event Action CameraAtLowestPoint;
 
     private void Start()
     {
@@ -43,5 +47,16 @@ public class MoveCamera : MonoBehaviour
             timer = 0; // Reset when stopped to avoid jerky behavior
             transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * 5f);
         }
+
+        if (bobOffset <= -bobAmplitude + 0.01f && !cameraAtLowestPoint) // Small tolerance to account for float precision
+        {
+            cameraAtLowestPoint = true;
+            CameraAtLowestPoint?.Invoke();
+        }
+        else if (bobOffset >= -bobAmplitude + 0.05f && cameraAtLowestPoint)
+        {
+            cameraAtLowestPoint = false;
+        }
+
     }
 }

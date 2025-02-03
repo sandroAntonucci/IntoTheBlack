@@ -28,6 +28,12 @@ public class AudioManager : MonoBehaviour
         isPlaying = false;  // Reset when finished
     }
 
+    public void PlayRandomSoundOnce()
+    {
+        audioPlayed.pitch = Random.Range(0.95f, 1.05f);
+        audioPlayed.Play();
+    }
+
 
     public void StartRandomSound()
     {

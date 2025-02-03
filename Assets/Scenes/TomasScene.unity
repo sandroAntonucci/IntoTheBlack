@@ -5288,14 +5288,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_Volume
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 8ee0df7adf9e32a48a02706a4e44ca01, type: 3}
+      objectReference: {fileID: 8300000, guid: 4737b01c1117d82459cae903c5a03fbf, type: 3}
     - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: runningSFX
+      value: 
+      objectReference: {fileID: 1213979755}
+    - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: walkingSFX
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
@@ -5303,9 +5311,21 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: runningClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ee0df7adf9e32a48a02706a4e44ca01, type: 3}
+    - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: walkingClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4737b01c1117d82459cae903c5a03fbf, type: 3}
+    - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: crouchHeight
       value: 1.4
       objectReference: {fileID: 0}
+    - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: footstepsSFX
+      value: 
+      objectReference: {fileID: 1213979755}
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: runningSpeed
       value: 6
@@ -5317,6 +5337,10 @@ PrefabInstance:
     - target: {fileID: 3569373865952601311, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: maxSlopeAngle
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337822394958283388, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+      propertyPath: m_Name
+      value: FootstepsSFX
       objectReference: {fileID: 0}
     - target: {fileID: 5420541268195127319, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: variableVelocity
@@ -6678,6 +6702,17 @@ MonoBehaviour:
   stairsLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1213979755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5420541268195127319, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
+  m_PrefabInstance: {fileID: 995524501}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213979749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7751f5be5ba1b814abd3030f2829c2c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1214956527 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 469502, guid: 04c36f15bbecd854cab50deedb5c594f, type: 3}
@@ -11736,9 +11771,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1871955557807738252, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185049726041589021, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2567420997749143887, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
       propertyPath: m_Name
       value: LockedDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2567420997749143887, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863875212989181107, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3022748309089588499, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11750,6 +11801,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3022748309089588499, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4327376176662196443, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799869647109904979, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799869647109904979, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5609565483411830939, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
@@ -11796,12 +11859,21 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7691590562415784672, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 8741312039506679187, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9197515692807146159, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1871955557807738252, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98a08eb60afd001448939d7b6d97b71a, type: 3}

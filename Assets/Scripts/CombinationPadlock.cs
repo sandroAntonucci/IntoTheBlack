@@ -22,6 +22,10 @@ public class CombinationPadlock : MonoBehaviour
 
     [SerializeField] private GameObject[] numbers;
 
+    [SerializeField] private AudioManager changeNumberSFX;
+    [SerializeField] private AudioManager errorNumberSFX;
+    [SerializeField] private AudioManager correctNumberSFX;
+
     private int[] inputCode;
     private Animator animator;
 
@@ -75,6 +79,7 @@ public class CombinationPadlock : MonoBehaviour
             inputCode[position] = (inputCode[position] - 1 + 10) % 10;
         }
 
+        changeNumberSFX.PlayRandomSoundOnce();
 
         Quaternion desiredRotation = currentRotation * Quaternion.Euler(rotationAmount, 0, 0);
 
@@ -109,6 +114,7 @@ public class CombinationPadlock : MonoBehaviour
             if (inputCode[i] != secretCode[i])
             {
                 isCorrect = false;
+                errorNumberSFX.PlayRandomSoundOnce();
                 animator.Play("CombinationPadlock_error");  
                 break;
             }
@@ -116,6 +122,7 @@ public class CombinationPadlock : MonoBehaviour
 
         if (isCorrect)
         {
+            correctNumberSFX.PlayRandomSoundOnce();
             animator.Play("CombinationPadlock_open");
             correctCode = true;
         }
@@ -123,9 +130,9 @@ public class CombinationPadlock : MonoBehaviour
 
     }
 
-    // Metodo llamado a través de la animacion
     public void ExitPadlock()
     {
+
         if (puzzleScreen.activeSelf == true)
             puzzleScreen.SetActive(false);
 
@@ -143,6 +150,8 @@ public class CombinationPadlock : MonoBehaviour
         Cursor.visible = false;  // Hacer invisible el cursor
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
+        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
 
         if (correctCode)
         {
@@ -159,6 +168,8 @@ public class CombinationPadlock : MonoBehaviour
         textToPlayer.SetActive(false);
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = false;
+        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = false;
 
         // Activar el cursor
         Cursor.lockState = CursorLockMode.None;  // Desbloquear el cursor
@@ -198,9 +209,6 @@ public class CombinationPadlock : MonoBehaviour
             playerIsInteracting = false;
             ExitPadlock();
         }
-
-
-
     }
 
 }

@@ -23,7 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private PlayerStamina playerStamina;
 
-    [SerializeField] private AudioManager walkSFX;
+    [SerializeField] private AudioManager footstepsSFX;
+
+    private bool isMoving = false;
 
     private bool isCrouching = false;
 
@@ -59,20 +61,22 @@ public class PlayerMovement : MonoBehaviour
         controls.Player.Move.performed += ctx =>
         {
             MyInput(ctx);
-
-            walkSFX.StartRandomSound();
         };
 
         controls.Player.Move.canceled += ctx =>
         {
-            walkSFX.StopRandomSound();
             MyInput(ctx);
         };
 
 
         controls.Player.Crouch.performed += ctx => Crouch();
         controls.Player.Crouch.canceled += ctx => StandUp();
-        controls.Player.Run.started += ctx => StartRunning();
+
+        controls.Player.Run.started += ctx =>
+        {
+            StartRunning();
+        };
+
         controls.Player.Run.canceled += ctx =>
         {
             isRunning = false;
@@ -83,12 +87,14 @@ public class PlayerMovement : MonoBehaviour
     // Enables Controls
     private void OnEnable()
     {
+        CameraBobbing.CameraAtLowestPoint += PlayFootstepsSFX;
         controls.Enable();
     }
 
     // Disables Controls    
     private void OnDisable()
     {
+        CameraBobbing.CameraAtLowestPoint -= PlayFootstepsSFX;
         controls.Disable();
     }
 
@@ -102,6 +108,30 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         SpeedControl();
+        CrouchControl();
+    }
+
+    private void PlayFootstepsSFX()
+    {
+        footstepsSFX.PlayRandomSoundOnce();
+    }
+
+    // Manages crouching
+    private void CrouchControl()
+    {
+        if (isCrouching)
+        {
+            playerModel.transform.localScale = new Vector3(transform.localScale.x, crouchHeight, transform.localScale.z);
+            Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - (playerHeight - crouchHeight) / 2, transform.position.z);
+            playerModel.transform.position = Vector3.MoveTowards(playerModel.transform.position, targetPosition, 6f * Time.deltaTime);
+        }
+
+        else if (!isCrouching && playerModel.transform.localScale.y != playerHeight)
+        {
+            playerModel.transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
+            Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y + (playerHeight - crouchHeight) / 2, transform.position.z);
+            playerModel.transform.position = Vector3.MoveTowards(playerModel.transform.position, targetPosition, 6f * Time.deltaTime);
+        }
     }
 
     // Changes direction based on the inputs from the player
@@ -139,11 +169,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         float maxSpeed = isCrouching ? crouchSpeed : moveSpeed;
 
+
         if (flatVel.magnitude > maxSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * maxSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
+
     }
 
     // Crouches the player
@@ -153,11 +185,6 @@ public class PlayerMovement : MonoBehaviour
 
         isCrouching = true;
 
-        // Reduce the player's height
-        playerModel.transform.localScale = new Vector3(transform.localScale.x, crouchHeight, transform.localScale.z);
-
-        // Lower the player's position slightly
-        playerModel.transform.position = new Vector3(transform.position.x, transform.position.y - (playerHeight - crouchHeight) / 2, transform.position.z);
     }
 
     // Stands the player up
@@ -166,11 +193,6 @@ public class PlayerMovement : MonoBehaviour
         if (!isCrouching) return;
 
         isCrouching = false;
-        // Restore the player's height
-        playerModel.transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
-
-        // Raise the player's position slightly
-        playerModel.transform.position = new Vector3(transform.position.x, transform.position.y + (playerHeight - crouchHeight) / 2, transform.position.z);
     }
 
     private void StartRunning()

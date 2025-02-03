@@ -5,7 +5,6 @@ public class AudioManager : MonoBehaviour
 {
 
     public AudioSource audioPlayed;
-    public AudioClip[] clips;
 
     private Coroutine playSoundCoroutine;
     private bool isPlaying;
@@ -16,19 +15,25 @@ public class AudioManager : MonoBehaviour
 
         isPlaying = true;
 
+        // Randomizes pitch of the audio for the variable effect
         while (isPlaying)
         {
-            int randomIndex = Random.Range(0, clips.Length);
-            AudioClip clip = clips[randomIndex];
+            audioPlayed.pitch = Random.Range(0.95f, 1.05f);
 
-            audioPlayed.clip = clip;
             audioPlayed.Play();
 
-            yield return new WaitForSeconds(clip.length);
+            yield return new WaitUntil(() => !audioPlayed.isPlaying);
         }
 
         isPlaying = false;  // Reset when finished
     }
+
+    public void PlayRandomSoundOnce()
+    {
+        audioPlayed.pitch = Random.Range(0.95f, 1.05f);
+        audioPlayed.Play();
+    }
+
 
     public void StartRandomSound()
     {

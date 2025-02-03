@@ -130,9 +130,9 @@ public class CombinationPadlock : MonoBehaviour
 
     }
 
-    // Metodo llamado a través de la animacion
     public void ExitPadlock()
     {
+
         if (puzzleScreen.activeSelf == true)
             puzzleScreen.SetActive(false);
 
@@ -150,6 +150,8 @@ public class CombinationPadlock : MonoBehaviour
         Cursor.visible = false;  // Hacer invisible el cursor
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
+        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
 
         if (correctCode)
         {
@@ -166,6 +168,8 @@ public class CombinationPadlock : MonoBehaviour
         textToPlayer.SetActive(false);
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = false;
+        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = false;
 
         // Activar el cursor
         Cursor.lockState = CursorLockMode.None;  // Desbloquear el cursor

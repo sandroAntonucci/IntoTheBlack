@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class MoveCamera : MonoBehaviour
+public class CameraBobbing : MonoBehaviour
 {
     public Transform cameraPosition;
     public Transform player; // Reference to the player object

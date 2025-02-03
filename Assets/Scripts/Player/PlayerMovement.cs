@@ -87,14 +87,14 @@ public class PlayerMovement : MonoBehaviour
     // Enables Controls
     private void OnEnable()
     {
-        MoveCamera.CameraAtLowestPoint += PlayFootstepsSFX;
+        CameraBobbing.CameraAtLowestPoint += PlayFootstepsSFX;
         controls.Enable();
     }
 
     // Disables Controls    
     private void OnDisable()
     {
-        MoveCamera.CameraAtLowestPoint -= PlayFootstepsSFX;
+        CameraBobbing.CameraAtLowestPoint -= PlayFootstepsSFX;
         controls.Disable();
     }
 

@@ -13,6 +13,9 @@ public class CombinationPadlock : MonoBehaviour
     [SerializeField] private GameObject focusLight;
     [SerializeField] private GameObject textToPlayer;
 
+    [SerializeField] private MoveMenuCamera cameraZoomIn;
+    [SerializeField] private MoveMenuCamera cameraZoomOut;
+
     [SerializeField] private GameObject door;
 
     [SerializeField] private int[] secretCode;
@@ -133,11 +136,15 @@ public class CombinationPadlock : MonoBehaviour
     public void ExitPadlock()
     {
 
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
+        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
+
+
+        StartCoroutine(cameraZoomOut.CameraMovement());
+
         if (puzzleScreen.activeSelf == true)
             puzzleScreen.SetActive(false);
-
-        if (focusCamera.activeSelf == true)
-            focusCamera.SetActive(false);
 
         if (focusLight.activeSelf == true)
             focusLight.SetActive(false);
@@ -149,10 +156,6 @@ public class CombinationPadlock : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;  // Bloquear el cursor al centro
         Cursor.visible = false;  // Hacer invisible el cursor
 
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
-        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
-
         if (correctCode)
         {
             Destroy(gameObject);
@@ -162,7 +165,16 @@ public class CombinationPadlock : MonoBehaviour
 
     private IEnumerator OpenPadlock()
     {
-        focusCamera.SetActive(true);
+
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = false;
+        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = false;
+
+        StartCoroutine(cameraZoomIn.CameraMovement());
+
+        yield return new WaitForSeconds(cameraZoomIn.duration);
+
         puzzleScreen.SetActive(true);
         focusLight.SetActive(true);
         textToPlayer.SetActive(false);

@@ -6,9 +6,10 @@ public class MoveMenuCamera : MonoBehaviour
 
     private Camera mainCamera;
 
-    [SerializeField] private GameObject finalPositionReference;
+    public bool isZooming = false;
 
-    public bool getsRotationFromCamera = false;
+    [SerializeField] private GameObject finalPositionReference;
+    [SerializeField] private GameObject initialPositionReference;
 
     public Vector3 initialCameraPos;
     public Vector3 finalCameraPos;
@@ -29,15 +30,22 @@ public class MoveMenuCamera : MonoBehaviour
         if (finalPositionReference != null)
         {
             finalCameraPos = finalPositionReference.transform.position;
-
-            if (getsRotationFromCamera)
-                finalCameraRotation = mainCamera.transform.rotation.eulerAngles;
-            else
-                finalCameraRotation = finalPositionReference.transform.rotation.eulerAngles;
+            finalCameraRotation = finalPositionReference.transform.rotation.eulerAngles;
         }
 
-        initialCameraPos = GameObject.FindGameObjectWithTag("CameraPosition").transform.position;
-        initialCameraRotation = Quaternion.Euler(mainCamera.transform.rotation.eulerAngles).eulerAngles;
+        if (initialPositionReference != null)
+        {
+            initialCameraPos = initialPositionReference.transform.position;
+            initialCameraRotation = initialPositionReference.transform.rotation.eulerAngles;
+        }
+
+        else
+        {
+            initialCameraPos = GameObject.FindGameObjectWithTag("CameraPosition").transform.position;
+            initialCameraRotation = Quaternion.Euler(mainCamera.transform.rotation.eulerAngles).eulerAngles;
+        }
+
+        isZooming = true;
 
         float elapsedTime = 0f;
 
@@ -53,5 +61,7 @@ public class MoveMenuCamera : MonoBehaviour
             mainCamera.transform.position = finalCameraPos;
             mainCamera.transform.rotation = Quaternion.Euler(finalCameraRotation);
         }
+
+        isZooming = false;
     }
 }

@@ -136,12 +136,10 @@ public class CombinationPadlock : MonoBehaviour
     public void ExitPadlock()
     {
 
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
-        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
-
-
         StartCoroutine(cameraZoomOut.CameraMovement());
+
+        StartCoroutine(ActivatePlayer());
+
 
         if (puzzleScreen.activeSelf == true)
             puzzleScreen.SetActive(false);
@@ -158,20 +156,38 @@ public class CombinationPadlock : MonoBehaviour
 
         if (correctCode)
         {
-            Destroy(gameObject);
-            door.GetComponent<Animator>().Play("Door_Open");
+            StartCoroutine(DestroyPadlock());
         }
+    }
+
+    private IEnumerator ActivatePlayer()
+    {
+        yield return new WaitForSeconds(cameraZoomOut.duration);
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
+        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
+    }
+
+    private IEnumerator DestroyPadlock()
+    {
+        yield return new WaitForSeconds(cameraZoomOut.duration);
+
+        Destroy(gameObject);
+        door.GetComponent<Animator>().Play("Door_Open");
     }
 
     private IEnumerator OpenPadlock()
     {
-
-
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().velocity = Vector3.zero;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = false;
         GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = false;
 
         StartCoroutine(cameraZoomIn.CameraMovement());
+
+        cameraZoomOut.finalCameraPos = cameraZoomIn.initialCameraPos;
+        cameraZoomOut.finalCameraRotation = cameraZoomIn.initialCameraRotation;
 
         yield return new WaitForSeconds(cameraZoomIn.duration);
 
@@ -210,13 +226,13 @@ public class CombinationPadlock : MonoBehaviour
 
     private void Update()
     {
-        if (playerCanInteract && Input.GetKeyDown(KeyCode.E) && !playerIsInteracting)
+        if (playerCanInteract && Input.GetKeyDown(KeyCode.E) && !playerIsInteracting && !cameraZoomOut.isZooming)
         {
             playerIsInteracting = true;
             StartCoroutine(OpenPadlock());
         }
 
-        else if (playerIsInteracting && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)))
+        else if (playerIsInteracting && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)) && !cameraZoomIn.isZooming && !correctCode)
         {
             playerIsInteracting = false;
             ExitPadlock();

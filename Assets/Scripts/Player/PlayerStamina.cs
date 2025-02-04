@@ -24,7 +24,7 @@ public class PlayerStamina : MonoBehaviour
     // Updates current stamina based on running state
     private void Update()
     {
-        if (playerMovement.isRunning && playerMovement.moveDirection != Vector3.zero)
+        if (playerMovement.isRunning && playerMovement.moveDirection != Vector3.zero && playerMovement.rb.velocity.magnitude > 0.1)
         {
             UseStamina();
 

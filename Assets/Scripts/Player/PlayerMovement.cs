@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 moveDirection;
 
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     [SerializeField] private float maxSlopeAngle = 45f;
     private RaycastHit hitInfo;
@@ -148,19 +148,8 @@ public class PlayerMovement : MonoBehaviour
         // Calculamos la dirección de movimiento según la entrada del jugador
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        // Si la pendiente es suave, agregamos un pequeño impulso hacia arriba
-        if (Vector3.Angle(hitInfo.normal, Vector3.up) < maxSlopeAngle)
-        {
-            // Aseguramos que el jugador se mueve hacia arriba un poco
-            Vector3 verticalPush = hitInfo.normal * (verticalInput > 0 ? 0.5f : 0);  // Ajustar el valor según sea necesario
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
-            // Aplicamos el movimiento con la dirección de la pendiente y el pequeño empuje vertical
-            rb.AddForce((moveDirection + verticalPush).normalized * moveSpeed * 10f, ForceMode.Force);
-        }
-        else
-        {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        }
     }
 
     // Limits the player's speed
@@ -176,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
 
+
     }
 
     // Crouches the player
@@ -184,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
         if (isCrouching) return;
 
         isCrouching = true;
-
+        isRunning = false;
     }
 
     // Stands the player up
@@ -197,6 +187,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartRunning()
     {
+
+        if (isCrouching) return;
+
         isRunning = true;
         baseMoveSpeed = moveSpeed;
         moveSpeed = runningSpeed;

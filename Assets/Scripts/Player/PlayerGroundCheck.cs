@@ -18,8 +18,6 @@ public class PlayerGroundCheck : MonoBehaviour
         RaycastHit hit;
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, groundRayDistance, groundLayer);
 
-        Debug.Log(isGrounded);
-
         if (!isGrounded)
         {
             rb.AddForce(Vector3.down * extraGravity, ForceMode.Acceleration);

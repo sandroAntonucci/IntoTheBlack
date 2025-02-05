@@ -116,21 +116,23 @@ public class PlayerMovement : MonoBehaviour
         footstepsSFX.PlayRandomSoundOnce();
     }
 
-    // Manages crouching
     private void CrouchControl()
     {
         if (isCrouching)
         {
             playerModel.transform.localScale = new Vector3(transform.localScale.x, crouchHeight, transform.localScale.z);
-            Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - (playerHeight - crouchHeight) / 2, transform.position.z);
-            playerModel.transform.position = Vector3.MoveTowards(playerModel.transform.position, targetPosition, 6f * Time.deltaTime);
         }
-
         else if (!isCrouching && playerModel.transform.localScale.y != playerHeight)
         {
-            playerModel.transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
-            Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y + (playerHeight - crouchHeight) / 2, transform.position.z);
-            playerModel.transform.position = Vector3.MoveTowards(playerModel.transform.position, targetPosition, 6f * Time.deltaTime);
+            // Perform a raycast upward to check for obstacles
+            float checkHeight = playerHeight + 0.1f; // Small buffer to avoid precision issues
+            RaycastHit hit;
+
+            if (!Physics.Raycast(transform.position, Vector3.up, out hit, checkHeight))
+            {
+                // No ceiling detected, allow standing up
+                playerModel.transform.localScale = new Vector3(transform.localScale.x, playerHeight, transform.localScale.z);
+            }
         }
     }
 

@@ -1,21 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FrightBehaviour : MonoBehaviour
 {
     private const string PlayerTag = "Player";
     private const float time = 1f;
     public Camera frightCamera;
-
-    private void Update()
-    {
-        //PRUEBA DE QUE FUNCIONE
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(ActivateEnemyCamera());
-        }
-    }
 
     private IEnumerator ActivateEnemyCamera()
     {
@@ -27,6 +19,8 @@ public class FrightBehaviour : MonoBehaviour
 
         Time.timeScale = 1;
         frightCamera.gameObject.SetActive(false);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -74,13 +74,13 @@ public class PatrolBehaviour : MonoBehaviour
         Transform teleport = GetRandomWaypoint(waypoints);
         transform.position = teleport.position;
 
-        Debug.Log($"TELEPORT: {teleport.name}");
+        //Debug.Log($"TELEPORT: {teleport.name}");
 
         // Se mueve hacia ese destino
         Transform newDestination = GetRandomWaypoint(waypoints);
         agent.SetDestination(newDestination.position);
 
-        Debug.Log($"DESTINATION: {newDestination.name}");
+        //Debug.Log($"DESTINATION: {newDestination.name}");
     }
 
     private Transform GetRandomWaypoint(List<Transform> waypoints)

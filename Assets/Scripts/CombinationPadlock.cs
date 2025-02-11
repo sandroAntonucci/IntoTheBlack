@@ -136,10 +136,13 @@ public class CombinationPadlock : MonoBehaviour
     public void ExitPadlock()
     {
 
+        if (cameraZoomIn.isZooming || !playerIsInteracting) return;
+            
+        playerIsInteracting = false;
+
         StartCoroutine(cameraZoomOut.CameraMovement());
 
         StartCoroutine(ActivatePlayer());
-
 
         if (puzzleScreen.activeSelf == true)
             puzzleScreen.SetActive(false);
@@ -232,9 +235,8 @@ public class CombinationPadlock : MonoBehaviour
             StartCoroutine(OpenPadlock());
         }
 
-        else if (playerIsInteracting && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)) && !cameraZoomIn.isZooming && !correctCode)
+        else if (playerIsInteracting && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)) && !correctCode)
         {
-            playerIsInteracting = false;
             ExitPadlock();
         }
     }

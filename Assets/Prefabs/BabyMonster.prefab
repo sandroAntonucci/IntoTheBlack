@@ -230,6 +230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BabyMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f7a1b526a01b71e4d95a23563a957e8f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1136686147692683889, guid: f7a1b526a01b71e4d95a23563a957e8f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -328,7 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0931959cb74de7d4ab0b34f1ae6d3df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   frightCamera: {fileID: 6658524980582637481}
 --- !u!114 &1376419765027737713
 MonoBehaviour:

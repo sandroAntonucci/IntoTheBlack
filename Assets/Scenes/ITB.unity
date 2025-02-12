@@ -725,23 +725,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 488944, guid: 8996c8680be073342a111a684ca95e17, type: 3}
   m_PrefabInstance: {fileID: 46633864}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &144240654 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7867500920531917113, guid: 230af033e8ad91741a7cab16f9f4319e, type: 3}
-  m_PrefabInstance: {fileID: 6826745879816606162}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &144240656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 144240654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fc1b2fec99d8af43b0c0c28726fa981, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &165060750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6743,23 +6726,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5117166409411284618, guid: 230af033e8ad91741a7cab16f9f4319e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.85401416
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5117166409411284618, guid: 230af033e8ad91741a7cab16f9f4319e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5117166409411284618, guid: 230af033e8ad91741a7cab16f9f4319e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.52024984
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5117166409411284618, guid: 230af033e8ad91741a7cab16f9f4319e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5117166409411284618, guid: 230af033e8ad91741a7cab16f9f4319e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 62.698
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7378350619589690243, guid: 230af033e8ad91741a7cab16f9f4319e, type: 3}
       propertyPath: m_LocalScale.x
@@ -6825,9 +6808,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7867500920531917113, guid: 230af033e8ad91741a7cab16f9f4319e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 144240656}
     - targetCorrespondingSourceObject: {fileID: 8997142622112078629, guid: 230af033e8ad91741a7cab16f9f4319e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 182171408}

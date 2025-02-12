@@ -634,6 +634,7 @@ GameObject:
   - component: {fileID: 7209783347419313656}
   - component: {fileID: 684137480261863397}
   - component: {fileID: 1819449648391482943}
+  - component: {fileID: 6517992314437790109}
   m_Layer: 0
   m_Name: Armario
   m_TagString: Untagged
@@ -657,6 +658,7 @@ Transform:
   - {fileID: 7663189362775943654}
   - {fileID: 8611827489190109110}
   - {fileID: 5117166409411284618}
+  - {fileID: 8363568337400512054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7209783347419313656
@@ -672,6 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionText: {fileID: 5791938641492442570}
+  cameraInside: {fileID: 0}
 --- !u!65 &684137480261863397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -714,6 +717,57 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6517992314437790109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7867500920531917113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f24f36e13266d4e8ee9183108bfe18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isZooming: 0
+  finalPositionReference: {fileID: 8064761072370239978}
+  initialPositionReference: {fileID: 0}
+  initialCameraPos: {x: 0, y: 0, z: 0}
+  finalCameraPos: {x: 0, y: 0, z: 0}
+  initialCameraRotation: {x: 0, y: 0, z: 0}
+  finalCameraRotation: {x: 0, y: 0, z: 0}
+  duration: 1
+--- !u!1 &8064761072370239978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8363568337400512054}
+  m_Layer: 0
+  m_Name: CameraInside
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8363568337400512054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064761072370239978}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 1.542, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7378350619589690243}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &8997142622112078629
 GameObject:
   m_ObjectHideFlags: 0

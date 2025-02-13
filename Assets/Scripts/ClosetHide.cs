@@ -14,7 +14,7 @@ public class ClosetHide : MonoBehaviour
 
     private bool playerInsideCloset = false;
 
-    private bool playerOpeningCloset = false;   
+    public bool playerOpeningCloset = false;   
 
     private Animator anim;
 
@@ -53,31 +53,21 @@ public class ClosetHide : MonoBehaviour
 
         StartCoroutine(cameraInside.CameraMovement());
 
-        playerOpeningCloset = true;
+        interactionText.SetActive(false);
 
         cameraOutside.finalCameraPos = cameraInside.initialCameraPos;
         cameraOutside.finalCameraRotation = cameraInside.initialCameraRotation;
 
-        interactionText.SetActive(false);
         anim.Play("Closet_Open");
 
         yield return new WaitForSeconds(cameraInside.duration);
 
-        playerOpeningCloset = false;
         playerInsideCloset = true;
-
-
 
     }
 
     private IEnumerator ExitCloset()
     {
-
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
-        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
-
-        playerOpeningCloset = true;
 
         StartCoroutine(cameraOutside.CameraMovement());
 
@@ -85,10 +75,13 @@ public class ClosetHide : MonoBehaviour
 
         yield return new WaitForSeconds(cameraInside.duration);
 
-
-        playerOpeningCloset = false;
-        playerInsideCloset = false;
         interactionText.SetActive(true);
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
+        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
+
+        playerInsideCloset = false;
 
     }
 
@@ -96,7 +89,6 @@ public class ClosetHide : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && playerInRange && !playerOpeningCloset)
         {
-
 
             if (!playerInsideCloset) StartCoroutine(EnterCloset());
             

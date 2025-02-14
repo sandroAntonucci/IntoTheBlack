@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Unity.VisualScripting.Dependencies.Sqlite;
 
-public class CameraBobbing : MonoBehaviour
+public class ItemBobbing : MonoBehaviour
 {
-    public Transform cameraPosition;
+    public Transform itemPosition;
     public Transform player; // Reference to the player object
 
     public float bobFrequency = 3f; // Speed of the bobbing effect
@@ -16,8 +17,8 @@ public class CameraBobbing : MonoBehaviour
     private float timer = 0f;
     private Vector3 originalPosition;
 
-    private bool cameraAtLowestPoint = false;
-    public static event Action CameraAtLowestPoint;
+    private bool itemAtLowestPoint = false;
+    public static event Action ItemAtLowestPoint;
 
     private void Start()
     {
@@ -26,11 +27,11 @@ public class CameraBobbing : MonoBehaviour
 
     private void Update()
     {
-        HandleHeadBobbing();
-        transform.position = new Vector3(cameraPosition.position.x, cameraPosition.position.y + bobOffset, cameraPosition.position.z);
+        HandleItemBobbing();
+        transform.position = new Vector3(itemPosition.position.x, itemPosition.position.y + bobOffset, itemPosition.position.z);
     }
 
-    private void HandleHeadBobbing()
+    private void HandleItemBobbing()
     {
         if (player == null) return;
 
@@ -48,14 +49,14 @@ public class CameraBobbing : MonoBehaviour
             transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * 5f);
         }
 
-        if (bobOffset <= -bobAmplitude + 0.01f && !cameraAtLowestPoint) // Small tolerance to account for float precision
+        if (bobOffset <= -bobAmplitude + 0.01f && !itemAtLowestPoint) // Small tolerance to account for float precision
         {
-            cameraAtLowestPoint = true;
-            CameraAtLowestPoint?.Invoke();
+            itemAtLowestPoint = true;
+            ItemAtLowestPoint?.Invoke();
         }
-        else if (bobOffset >= -bobAmplitude + 0.05f && cameraAtLowestPoint)
+        else if (bobOffset >= -bobAmplitude + 0.05f && itemAtLowestPoint)
         {
-            cameraAtLowestPoint = false;
+            itemAtLowestPoint = false;
         }
 
     }

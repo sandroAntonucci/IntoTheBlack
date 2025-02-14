@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine;
+using System.Collections;
 
 public class ButtonMethodsForMainMenu : MonoBehaviour
 {
@@ -11,16 +9,22 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     public Canvas RegisterPage;
     public Canvas OptionsPage;
     public MoveMenuCamera cameraScript;
+
+    public Canvas currentActiveCanvas; 
+
+    private void Start()
+    {
+        currentActiveCanvas = MainMenu;
+    }
+
     public void GoToLoginPage()
     {
-        MainMenu.gameObject.SetActive(false);
-        LoginPage.gameObject.SetActive(true);
+        SetActiveCanvas(LoginPage);
     }
 
     public void GoToRegisterPage()
     {
-        MainMenu.gameObject.SetActive(false);
-        RegisterPage.gameObject.SetActive(true);
+        SetActiveCanvas(RegisterPage);
     }
 
     public void GoToOptions()
@@ -28,18 +32,48 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         StartCoroutine(OptionsCoroutine());
     }
 
-    public IEnumerator GoToGame()
+    public IEnumerator GoToGameCoroutine()
     {
-        MainMenu.gameObject.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        SetActiveCanvas(null);
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("TomasScene");
+    }
+
+    public void GoToGame()
+    {
+        StartCoroutine(GoToGameCoroutine());
     }
 
     public IEnumerator OptionsCoroutine()
     {
-        MainMenu.gameObject.SetActive(false);
+        SetActiveCanvas(null);
         cameraScript.StartCoroutine(cameraScript.CameraMovement());
         yield return new WaitForSeconds(2.3f);
-        OptionsPage.gameObject.SetActive(true);
+        SetActiveCanvas(OptionsPage);
+    }
+
+    public void ReturnMainMenu()
+    {
+        if (currentActiveCanvas != null)
+        {
+            currentActiveCanvas.gameObject.SetActive(false);
+        }
+        MainMenu.gameObject.SetActive(true);
+        currentActiveCanvas = MainMenu;
+    }
+
+    private void SetActiveCanvas(Canvas newCanvas)
+    {
+        if (currentActiveCanvas != null)
+        {
+            currentActiveCanvas.gameObject.SetActive(false);
+        }
+
+        if (newCanvas != null)
+        {
+            newCanvas.gameObject.SetActive(true);
+        }
+
+        currentActiveCanvas = newCanvas;
     }
 }

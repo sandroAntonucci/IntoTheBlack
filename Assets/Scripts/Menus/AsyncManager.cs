@@ -19,7 +19,7 @@ public class AsyncManager : MonoBehaviour
 
     public IEnumerator LoadLevelAsync(string sceneName)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.3f);
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         while (!operation.isDone)
         {

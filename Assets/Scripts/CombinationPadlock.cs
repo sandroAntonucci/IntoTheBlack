@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CombinationPadlock : MonoBehaviour
 {
-    private const string PlayerTag = "Player";
+    private const string PlayerTag = "PlayerObj";
 
     [SerializeField] private GameObject puzzleScreen;
     [SerializeField] private GameObject focusCamera;

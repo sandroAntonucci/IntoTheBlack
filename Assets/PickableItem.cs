@@ -7,20 +7,23 @@ public class PickableItem : MonoBehaviour
 
     [SerializeField] private Item scriptableItem;
 
-    [SerializeField] private GameObject itemTag;
+    public GameObject instantiatedItem;
 
-    private bool playerCanInteract = false;
+    public bool playerCanInteract = false;
+
 
     private void Start()
     {
-        Instantiate(scriptableItem.itemModel, transform.position, Quaternion.identity, transform);
+        instantiatedItem = Instantiate(scriptableItem.itemModel, transform.position, Quaternion.identity, transform);
+        instantiatedItem.AddComponent<MeshCollider>().enabled = false;
+        instantiatedItem.GetComponent<MeshCollider>().convex = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PlayerObj"))
         {
-            itemTag.SetActive(true);
+            PlayerInterface.Instance.TextToPlayer.text = "[E] to pick up";
             playerCanInteract = true;
         }
     }
@@ -29,7 +32,7 @@ public class PickableItem : MonoBehaviour
     {
         if (other.CompareTag("PlayerObj"))
         {
-            itemTag.SetActive(false);
+            PlayerInterface.Instance.TextToPlayer.text = "";
             playerCanInteract = false;
         }
     }
@@ -38,9 +41,17 @@ public class PickableItem : MonoBehaviour
     {
         if (playerCanInteract && Input.GetKeyDown(KeyCode.E))
         {
-            //PlayerInventory.Instance.AddItem(scriptableItem);
-            Destroy(gameObject);
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            PlayerInventory.Instance.AddItem(gameObject);
+            PlayerInterface.Instance.TextToPlayer.text = "";
+            playerCanInteract = false;
         }
+    }
+
+    public IEnumerator DroppedItem()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 }
 

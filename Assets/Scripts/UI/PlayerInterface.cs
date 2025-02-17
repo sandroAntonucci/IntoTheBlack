@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ public class PlayerInterface : MonoBehaviour
     public static PlayerInterface Instance { get; private set; }
 
     [SerializeField] private Image playerStamina;
+
+    public TextMeshProUGUI TextToPlayer;
 
     private void Awake()
     {

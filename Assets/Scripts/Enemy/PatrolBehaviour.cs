@@ -70,17 +70,42 @@ public class PatrolBehaviour : MonoBehaviour
 
     private void TeleportToWaypoint()
     {
-        // Se teletransporta a un nuevo lugar
         Transform teleport = GetRandomWaypoint(waypoints);
+
+        // Si el punto es visible por el jugador, cancela el TP
+        if (IsPointVisibleByPlayer(teleport.position))
+        {
+            Debug.Log("El jugador está mirando el punto de teletransporte. Cancelando TP.");
+            return;
+        }
+
         transform.position = teleport.position;
 
-        //Debug.Log($"TELEPORT: {teleport.name}");
-
-        // Se mueve hacia ese destino
+        // Se mueve hacia un nuevo destino
         Transform newDestination = GetRandomWaypoint(waypoints);
         agent.SetDestination(newDestination.position);
+    }
 
-        //Debug.Log($"DESTINATION: {newDestination.name}");
+    private bool IsPointVisibleByPlayer(Vector3 point)
+    {
+        Camera playerCamera = Camera.main;
+        if (playerCamera == null) return false;
+
+        Vector3 viewportPoint = playerCamera.WorldToViewportPoint(point);
+
+        // Verifica si el punto está en la vista de la cámara
+        if (viewportPoint.x >= 0 && viewportPoint.x <= 1 &&
+            viewportPoint.y >= 0 && viewportPoint.y <= 1 &&
+            viewportPoint.z > 0) // Debe estar delante de la cámara
+        {
+            // Comprobar si realmente es visible con un Raycast
+            Vector3 direction = point - playerCamera.transform.position;
+            if (Physics.Raycast(playerCamera.transform.position, direction, out RaycastHit hit))
+            {
+                return hit.point == point; // Si golpea exactamente el punto, está visible
+            }
+        }
+        return false;
     }
 
     private Transform GetRandomWaypoint(List<Transform> waypoints)

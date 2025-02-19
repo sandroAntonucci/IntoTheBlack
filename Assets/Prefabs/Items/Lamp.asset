@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d576d47d452c4904aa0907c3db70e963, type: 3}
-  m_Name: Screwdriver
+  m_Name: Lamp
   m_EditorClassIdentifier: 
-  itemName: ScrewDriver
-  itemModel: {fileID: 4344703512376388573, guid: f7f09711f09ebb342b6cd92c7e36e58c, type: 3}
+  itemName: Lamp
+  itemModel: {fileID: 1327769984569528, guid: 7bc62b4df422eed49905184a457c8db3, type: 3}

@@ -35,8 +35,8 @@ public class CheckItem : MonoBehaviour
             if(PlayerInventory.Instance.currentItem != null && PlayerInventory.Instance.currentItem.GetComponent<PickableItem>().scriptableItem.itemName == itemName)
             {
                 interactableObject.Interaction();
-                PlayerInventory.Instance.currentItem = null;
                 Destroy(PlayerInventory.Instance.currentItem);
+                PlayerInventory.Instance.currentItem = null;
             }
             else
             {

@@ -1,20 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlockingPlanks : InteractableObject
 {
 
-    [SerializeField] private GameObject redScrewOne;
-    [SerializeField] private GameObject redScrewTwo;
+    [SerializeField] private GameObject[] redScrews;
+    [SerializeField] private GameObject redPlank;
+
+    [SerializeField] private GameObject[] greenScrews;
+    [SerializeField] private GameObject greenPlank;
+
 
     public override void Interaction()
     {
 
-        if (PlayerInventory.Instance.currentItem.GetComponent<PickableItem>().scriptableItem.name == "RedScrewDriver")
+        if (PlayerInventory.Instance.currentItem.GetComponent<PickableItem>().scriptableItem.itemName == "RedScrewDriver")
         {
-            redScrewOne.GetComponent<Animator>().Play("Screw");
+            StartCoroutine(Unscrew(redScrews, redPlank));
         }
+
+        else if (PlayerInventory.Instance.currentItem.GetComponent<PickableItem>().scriptableItem.itemName == "GreenScrewDriver")
+        {
+            StartCoroutine(Unscrew(greenScrews, greenPlank));
+        }
+
+    }
+
+    public IEnumerator Unscrew(GameObject[] screws, GameObject plank)
+    {
+
+        foreach (GameObject screw in screws)
+        {
+            screw.GetComponent<Animator>().Play("ScrewAnim");
+            yield return new WaitForSeconds(screw.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            Destroy(screw);
+        }
+
+        //Lerps the plank to the side
+
+        float time = 0;
+
+        Vector3 initialPos = plank.transform.position;
+
+        while (time < 0.6)
+        {
+            time += Time.deltaTime;
+            plank.transform.position = Vector3.Lerp(initialPos, initialPos + new Vector3(-1, 0, 0), time);
+            yield return null;
+        }
+
+        Destroy(plank);
 
     }
 

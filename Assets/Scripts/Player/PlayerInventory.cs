@@ -57,16 +57,20 @@ public class PlayerInventory : MonoBehaviour
 
     public void AddItem(GameObject item)
     {
+
         if (item != null)
         {
+
+            if(currentItem != null) DropItem();
+
             currentItem = item;
 
             // Set as child of itemHolder
             currentItem.transform.parent = itemHolder.transform;
 
             // Reset position and rotation relative to parent
-            currentItem.transform.localPosition = new Vector3(-0.55f, -0.15f, 1f);
-            currentItem.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            currentItem.transform.localPosition = new Vector3(-0.433f, 0.134f, 0.809f);
+            currentItem.transform.localRotation = Quaternion.Euler(70, 0, -20);
 
             currentItem.GetComponent<Rigidbody>().isKinematic = true;
 

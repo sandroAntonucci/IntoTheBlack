@@ -12,18 +12,37 @@ public class BlockingPlanks : InteractableObject
     [SerializeField] private GameObject[] greenScrews;
     [SerializeField] private GameObject greenPlank;
 
+    [SerializeField] private GameObject[] purpleScrews;
+    [SerializeField] private GameObject purplePlank;
 
-    public override void Interaction()
+    private int currentPlanks = 3;
+
+    public override void Interaction(string itemName)
     {
 
-        if (PlayerInventory.Instance.currentItem.GetComponent<PickableItem>().scriptableItem.itemName == "RedScrewDriver")
+        currentPlanks--;
+
+        if (itemName == "RedScrewDriver")
         {
             StartCoroutine(Unscrew(redScrews, redPlank));
         }
 
-        else if (PlayerInventory.Instance.currentItem.GetComponent<PickableItem>().scriptableItem.itemName == "GreenScrewDriver")
+        else if (itemName == "GreenScrewDriver")
         {
             StartCoroutine(Unscrew(greenScrews, greenPlank));
+        }
+
+        else if (itemName == "PurpleScrewDriver")
+        {
+            StartCoroutine(Unscrew(purpleScrews, purplePlank));
+        }
+
+        // Object not interactable anymore
+        if (currentPlanks == 0)
+        {
+            PlayerInterface.Instance.TextToPlayer.text = "";
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<CheckItem>().enabled = false;
         }
 
     }
@@ -62,7 +81,7 @@ public class BlockingPlanks : InteractableObject
 
     public IEnumerator ShowError()
     {
-        PlayerInterface.Instance.ErrorText.text = "You need to find the screwdrivers";
+        PlayerInterface.Instance.ErrorText.text = "You need to find the screwdrivers...";
         yield return new WaitForSeconds(2);
         PlayerInterface.Instance.ErrorText.text = "";
     }

@@ -15,7 +15,7 @@ public class FusePanel : InteractableObject
         anim = GetComponent<Animator>();
     }
 
-    public override void Interaction()
+    public override void Interaction(string itemName)
     {
 
         if (currentFuses == 0)
@@ -29,6 +29,7 @@ public class FusePanel : InteractableObject
         {
             anim.Play("AddFuseThree");
             gameObject.GetComponent<BoxCollider>().enabled = false;
+            gameObject.GetComponent<CheckItem>().enabled = false;
         }
 
         currentFuses++;

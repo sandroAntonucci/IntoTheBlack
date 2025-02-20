@@ -6,8 +6,9 @@ public class CheckItem : MonoBehaviour
 {
 
     [SerializeField] private InteractableObject interactableObject;
-    [SerializeField] private string itemName;
+    [SerializeField] private string[] itemNames;
 
+    bool foundItem = false;
     bool playerCanInteract = false;
 
     private void OnTriggerEnter(Collider other)
@@ -32,16 +33,28 @@ public class CheckItem : MonoBehaviour
     {
         if (playerCanInteract && Input.GetKeyDown(KeyCode.E))
         {
-            if(PlayerInventory.Instance.currentItem != null && PlayerInventory.Instance.currentItem.GetComponent<PickableItem>().scriptableItem.itemName == itemName)
+
+            // Searches for the item in the player's inventory
+            foreach (string s in itemNames)
             {
-                interactableObject.Interaction();
-                Destroy(PlayerInventory.Instance.currentItem);
-                PlayerInventory.Instance.currentItem = null;
+                if (PlayerInventory.Instance.currentItem != null && PlayerInventory.Instance.currentItem.GetComponent<PickableItem>().scriptableItem.itemName == s)
+                {
+                    interactableObject.Interaction(s);
+                    Destroy(PlayerInventory.Instance.currentItem);
+                    PlayerInventory.Instance.currentItem = null;
+                    foundItem = true;
+                }
             }
-            else
+
+            // If the item is not found in the player's inventory
+            if (!foundItem)
             {
                 interactableObject.InteractionError();
             }
+
+            // Reset the foundItem variable
+            foundItem = false;
+
         }
     }
 

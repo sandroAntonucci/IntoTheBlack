@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class InteractableObject : MonoBehaviour
 {
     
-    public abstract void Interaction();
+    public abstract void Interaction(string itemName);
     public abstract void InteractionError();
 
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d576d47d452c4904aa0907c3db70e963, type: 3}
-  m_Name: Lamp
+  m_Name: PurpleScrewDriver
   m_EditorClassIdentifier: 
-  itemName: Lamp
-  itemModel: {fileID: 1327769984569528, guid: 7bc62b4df422eed49905184a457c8db3, type: 3}
+  itemName: PurpleScrewDriver
+  itemModel: {fileID: 7564130921499157588, guid: 92037e7e2cc40134c8da6c1b13b8631a, type: 3}

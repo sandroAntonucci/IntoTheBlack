@@ -13,7 +13,7 @@ public class PlayerInterface : MonoBehaviour
     [SerializeField] private Image playerStamina;
 
     public TextMeshProUGUI TextToPlayer;
-
+    public TextMeshProUGUI ErrorText;
     private void Awake()
     {
         if (Instance == null) Instance = this;

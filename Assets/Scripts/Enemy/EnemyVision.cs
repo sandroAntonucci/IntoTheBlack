@@ -12,9 +12,17 @@ public class EnemyVision : MonoBehaviour
 
     public bool PlayerInSight { get => playerInSight; }
 
+    public Coroutine CoroutineStopFollowing { get; set; }
+
     void Update()
     {
         DetectPlayer();
+    }
+
+    private IEnumerator StopFollowingPlayer()
+    {
+        yield return new WaitForSeconds(5f);
+        playerInSight = false;
     }
 
     void DetectPlayer()
@@ -38,13 +46,15 @@ public class EnemyVision : MonoBehaviour
                 {
                     if (hit.transform == player)
                     {
+
+                        if (CoroutineStopFollowing != null) StopCoroutine(CoroutineStopFollowing);
+
                         // El jugador está en el campo de visión y no hay obstáculos en el camino
                         playerInSight = true;
                     }
                     else
                     {
-                        // Hay un obstáculo entre el enemigo y el jugador
-                        playerInSight = false;
+                        CoroutineStopFollowing = StartCoroutine(StopFollowingPlayer());
                     }
                 }
             }

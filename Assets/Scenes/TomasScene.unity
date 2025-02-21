@@ -2262,7 +2262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecba2554e42ed14a8345a88f1dcbe7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPosition: {fileID: 562068324}
+  itemPosition: {fileID: 0}
   player: {fileID: 1206059642}
   bobFrequency: 3
   bobAmplitude: 0.05
@@ -3320,11 +3320,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 465018, guid: ae4e40571a130a0459daec567e503f34, type: 3}
   m_PrefabInstance: {fileID: 35300358}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &562068324 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7676111662018526169, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
-  m_PrefabInstance: {fileID: 995524501}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &594092379
 PrefabInstance:

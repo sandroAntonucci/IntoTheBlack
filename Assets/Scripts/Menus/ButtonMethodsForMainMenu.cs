@@ -85,29 +85,11 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
 
     public void Register()
     {
-        const string EmptyUsername = "Username is empty";
-        const string EmptyPassword = "Password is empty";
-        const string EmptyEmail = "Email is empty";
         string email = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[0].text;
         string username = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
         string password = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[2].text;
 
-        if (string.IsNullOrEmpty(username))
-        {
-            RegisterPage.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[1].text = EmptyUsername;
-        }
-        if (string.IsNullOrEmpty(password))
-        {
-            RegisterPage.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[1].text = EmptyPassword;
-        }
-        if (string.IsNullOrEmpty(email))
-        {
-            RegisterPage.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[1].text = EmptyEmail;
-        }
-        if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(email))
-        {
-            StartCoroutine(RegisterUser(username, password, email));
-        }
+        StartCoroutine(RegisterUser(username, password, email));
     }
     public IEnumerator RegisterUser(string username, string password, string email)
     {
@@ -123,13 +105,15 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
+            RegisterPage.GetComponentsInChildren<TextMeshProUGUI>()[1].color = Color.green;
             RegisterPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = "User Registered!";
             yield return new WaitForSeconds(2);
             ReturnMainMenu();
         }
         else
         {
-            RegisterPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = "Error: " + request.error;
+            string errorMessage = request.downloadHandler.text;
+            RegisterPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = errorMessage;
         }
     }
 
@@ -140,23 +124,10 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
 
     public void Login()
     {
-        const string EmptyUsername = "Username is empty";
-        const string EmptyPassword = "Password is empty";
         string username = LoginPage.GetComponentsInChildren<TMPro.TMP_InputField>()[0].text;
         string password = LoginPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
 
-        if (string.IsNullOrEmpty(username))
-        {
-            LoginPage.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[1].text = EmptyUsername;
-        }
-        if (string.IsNullOrEmpty(password))
-        {
-            LoginPage.GetComponentsInChildren<TMPro.TextMeshProUGUI>()[1].text = EmptyPassword;
-        }
-        if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
-        {
-            StartCoroutine(LoginRequest(username, password));
-        }
+        StartCoroutine(LoginRequest(username, password));
     }
 
     public IEnumerator LoginRequest(string username, string password)
@@ -174,13 +145,15 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
+            LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].color = Color.green;
             LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = "Login successful!";
             yield return new WaitForSeconds(2);
             GoToGame();
         }
         else
         {
-            LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = "Error: " + request.error;
+            string errorMessage = request.downloadHandler.text;
+            LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = errorMessage;
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class PatrolBehaviour : MonoBehaviour
 {
-    private const string ParamWalk = "Walk", ParamRun = "Run";
+    private const string ParamRun = "Run";
 
     private const int doubleValue = 2;
     private const float minRemainingDistance = 0.5f;
@@ -40,13 +40,12 @@ public class PatrolBehaviour : MonoBehaviour
             agent.SetDestination(target.transform.position);
             agent.speed = speed * doubleValue; // Aumenta su velocidad
             animator.SetBool(ParamRun, true);
-            animator.SetBool(ParamWalk, true);
+
             return;
         }
         else
         {
             agent.speed = speed;
-            animator.SetBool(ParamRun, false);
         }
 
         if (agent.remainingDistance <= minRemainingDistance && !agent.pathPending && !isWaiting)
@@ -54,18 +53,19 @@ public class PatrolBehaviour : MonoBehaviour
             StartCoroutine(WaitBeforeNextDestination());  // Llama la corutina para esperar
         }
         agent.isStopped = isWaiting;
+        animator.speed = speed / 3;
     }
 
     private IEnumerator WaitBeforeNextDestination()
     {
         isWaiting = true;
-        animator.SetBool(ParamWalk, false);
+        animator.SetBool(ParamRun, false);
 
         yield return new WaitForSeconds(waitTime);
 
         isWaiting = false;
         ChangeWaypoint();
-        animator.SetBool(ParamWalk, true);
+        animator.SetBool(ParamRun, true);
     }
 
     private void ChangeWaypoint()

@@ -21,6 +21,7 @@ public class EnemyVision : MonoBehaviour
 
     private IEnumerator StopFollowingPlayer()
     {
+        Debug.Log("Stop following player");
         yield return new WaitForSeconds(5f);
         playerInSight = false;
     }
@@ -47,25 +48,29 @@ public class EnemyVision : MonoBehaviour
                     if (hit.transform == player)
                     {
 
-                        if (CoroutineStopFollowing != null) StopCoroutine(CoroutineStopFollowing);
+                        if (CoroutineStopFollowing != null)
+                        {
+                            StopCoroutine(CoroutineStopFollowing);
+                            CoroutineStopFollowing = null;
+                        }
 
                         // El jugador está en el campo de visión y no hay obstáculos en el camino
                         playerInSight = true;
                     }
                     else
                     {
-                        CoroutineStopFollowing = StartCoroutine(StopFollowingPlayer());
+                        if(playerInSight && CoroutineStopFollowing == null) CoroutineStopFollowing = StartCoroutine(StopFollowingPlayer());
                     }
                 }
             }
             else
             {
-                playerInSight = false;
+                if (playerInSight && CoroutineStopFollowing == null) CoroutineStopFollowing = StartCoroutine(StopFollowingPlayer());
             }
         }
         else
         {
-            playerInSight = false;
+            if (playerInSight && CoroutineStopFollowing == null) CoroutineStopFollowing = StartCoroutine(StopFollowingPlayer());
         }
     }
 

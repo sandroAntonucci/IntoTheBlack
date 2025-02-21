@@ -111,7 +111,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     }
     public IEnumerator RegisterUser(string username, string password, string email)
     {
-        string url = "http://localhost:8080/api/users/register";
+        string url = "http://localhost:8080/auth/register";
         string jsonData = $"{{\"username\":\"{username}\",\"password\":\"{password}\",\"email\":\"{email}\"}}";
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
         UnityWebRequest request = new UnityWebRequest(url, "POST");
@@ -161,7 +161,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
 
     public IEnumerator LoginRequest(string username, string password)
     {
-        string url = "http://localhost:8080/api/users/login";
+        string url = "http://localhost:8080/auth/login";
         string jsonData = $"{{\"username\":\"{username}\",\"password\":\"{password}\"}}";
 
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);

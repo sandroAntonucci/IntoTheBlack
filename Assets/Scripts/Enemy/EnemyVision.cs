@@ -7,6 +7,7 @@ public class EnemyVision : MonoBehaviour
     public Transform player;  // El objeto jugador
     public float visionRange = 10f;  // Rango de visión del enemigo
     public float visionAngle = 90f;  // Ángulo de visión del enemigo
+    public float timeToStopFollowingPlayer = 2.5f;
     public LayerMask obstacleLayer;  // Capa para detectar obstáculos (muros, etc.)
     private bool playerInSight = false;  // Indica si el jugador está dentro del campo de visión
 
@@ -21,8 +22,7 @@ public class EnemyVision : MonoBehaviour
 
     private IEnumerator StopFollowingPlayer()
     {
-        Debug.Log("Stop following player");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(timeToStopFollowingPlayer);
         playerInSight = false;
     }
 

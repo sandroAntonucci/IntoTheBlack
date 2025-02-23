@@ -5,17 +5,16 @@ using UnityEngine.AI;
 
 public class PatrolBehaviour : MonoBehaviour
 {
-    private const string ParamRun = "Run";
 
-    private const int doubleValue = 2;
+    [SerializeField] private Animator animator;
+
     private const float minRemainingDistance = 0.5f;
 
-    public float speed = 1;     
+    public float speed = 0.5f;     
     public float waitTime = 2f; 
     public GameObject target;
     public List<Transform> waypoints;
 
-    private Animator animator;
     private NavMeshAgent agent;
     private EnemyVision vision;
     private bool isWaiting = false;
@@ -24,8 +23,6 @@ public class PatrolBehaviour : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(agent.transform.position);
         agent.speed = speed;
@@ -38,13 +35,21 @@ public class PatrolBehaviour : MonoBehaviour
         if (vision.PlayerInSight)
         {
             agent.SetDestination(target.transform.position);
-            agent.speed = speed * doubleValue; // Aumenta su velocidad
-            animator.SetBool(ParamRun, true);
+            agent.speed = speed * 4f; // Aumenta su velocidad
+            animator.SetFloat("WalkingSpeed", agent.velocity.magnitude);
+
+            // Effects to the player
+            PlayerCam.Instance.ChangeFOV(90f);
+            GrainEffect.Instance.FrightEffect();
 
             return;
         }
         else
         {
+            // Effects to the player
+            PlayerCam.Instance.ChangeFOV(60f);
+            GrainEffect.Instance.StopFrightEffect();
+
             agent.speed = speed;
         }
 
@@ -52,20 +57,19 @@ public class PatrolBehaviour : MonoBehaviour
         {
             StartCoroutine(WaitBeforeNextDestination());  // Llama la corutina para esperar
         }
+
+        animator.SetFloat("WalkingSpeed", agent.velocity.magnitude);
         agent.isStopped = isWaiting;
-        animator.speed = speed / 3;
     }
 
     private IEnumerator WaitBeforeNextDestination()
     {
         isWaiting = true;
-        animator.SetBool(ParamRun, false);
 
         yield return new WaitForSeconds(waitTime);
 
         isWaiting = false;
         ChangeWaypoint();
-        animator.SetBool(ParamRun, true);
     }
 
     private void ChangeWaypoint()

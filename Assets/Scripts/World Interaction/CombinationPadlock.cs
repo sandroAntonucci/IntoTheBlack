@@ -12,6 +12,7 @@ public class CombinationPadlock : MonoBehaviour
     [SerializeField] private GameObject focusCamera;
     [SerializeField] private GameObject focusLight;
     [SerializeField] private GameObject textToPlayer;
+    [SerializeField] private bool isGate;
 
     [SerializeField] private MoveMenuCamera cameraZoomIn;
     [SerializeField] private MoveMenuCamera cameraZoomOut;
@@ -178,8 +179,14 @@ public class CombinationPadlock : MonoBehaviour
         yield return new WaitForSeconds(cameraZoomOut.duration);
 
         Destroy(gameObject);
-        door.GetComponent<InteractableDoor>().isLocked = false;
-        door.GetComponent<BoxCollider>().enabled = true;
+
+        if(isGate) door.GetComponent<Animator>().Play("Door_Open");
+        else
+        {
+            door.GetComponent<InteractableDoor>().isLocked = false;
+            door.GetComponent<BoxCollider>().enabled = true;
+        }
+
     }
 
     private IEnumerator OpenPadlock()

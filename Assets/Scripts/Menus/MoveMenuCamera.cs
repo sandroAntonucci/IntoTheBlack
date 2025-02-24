@@ -26,7 +26,6 @@ public class MoveMenuCamera : MonoBehaviour
 
     public IEnumerator CameraMovement()
     {
-
         if (finalPositionReference != null)
         {
             finalCameraPos = finalPositionReference.transform.position;
@@ -38,30 +37,34 @@ public class MoveMenuCamera : MonoBehaviour
             initialCameraPos = initialPositionReference.transform.position;
             initialCameraRotation = initialPositionReference.transform.rotation.eulerAngles;
         }
-
         else
         {
             initialCameraPos = GameObject.FindGameObjectWithTag("CameraPosition").transform.position;
-            initialCameraRotation = Quaternion.Euler(mainCamera.transform.rotation.eulerAngles).eulerAngles;
+            initialCameraRotation = mainCamera.transform.rotation.eulerAngles;
         }
 
         isZooming = true;
-
         float elapsedTime = 0f;
+
+        Quaternion initialRotation = Quaternion.Euler(initialCameraRotation);
+        Quaternion finalRotation = Quaternion.Euler(finalCameraRotation);
 
         while (elapsedTime < duration)
         {
             float t = elapsedTime / duration;
             mainCamera.transform.position = Vector3.Lerp(initialCameraPos, finalCameraPos, t);
-            mainCamera.transform.rotation = Quaternion.Euler(Vector3.Lerp(initialCameraRotation, finalCameraRotation, t));
+
+            // Use Quaternion.Slerp for smooth rotation avoiding unnatural flips
+            mainCamera.transform.rotation = Quaternion.Slerp(initialRotation, finalRotation, t);
 
             elapsedTime += Time.deltaTime;
             yield return null;
-
-            mainCamera.transform.position = finalCameraPos;
-            mainCamera.transform.rotation = Quaternion.Euler(finalCameraRotation);
         }
+
+        mainCamera.transform.position = finalCameraPos;
+        mainCamera.transform.rotation = finalRotation; // No need for Quaternion.Euler again
 
         isZooming = false;
     }
+
 }

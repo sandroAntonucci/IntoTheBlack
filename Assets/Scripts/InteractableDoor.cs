@@ -23,7 +23,6 @@ public class InteractableDoor : MonoBehaviour
     {
         if (other.CompareTag("PlayerObj") && !isLocked)
         {
-            Debug.Log("This works");
             PlayerInterface.Instance.TextToPlayer.text = currentText;
             playerCanInteract = true;
         }

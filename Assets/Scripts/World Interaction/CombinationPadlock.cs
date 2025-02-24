@@ -169,6 +169,7 @@ public class CombinationPadlock : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ItemBobbing>().enabled = true;
         GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
     }
 
@@ -177,7 +178,8 @@ public class CombinationPadlock : MonoBehaviour
         yield return new WaitForSeconds(cameraZoomOut.duration);
 
         Destroy(gameObject);
-        door.GetComponent<Animator>().Play("Door_Open");
+        door.GetComponent<InteractableDoor>().isLocked = false;
+        door.GetComponent<BoxCollider>().enabled = true;
     }
 
     private IEnumerator OpenPadlock()
@@ -185,6 +187,7 @@ public class CombinationPadlock : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().velocity = Vector3.zero;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = false;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ItemBobbing>().enabled = false;
         GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = false;
 
         StartCoroutine(cameraZoomIn.CameraMovement());
@@ -197,10 +200,6 @@ public class CombinationPadlock : MonoBehaviour
         puzzleScreen.SetActive(true);
         focusLight.SetActive(true);
         textToPlayer.SetActive(false);
-
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = false;
-        GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = false;
 
         // Activar el cursor
         Cursor.lockState = CursorLockMode.None;  // Desbloquear el cursor

@@ -66,7 +66,7 @@ public class BlockingPlanks : InteractableObject
         while (time < 0.6)
         {
             time += Time.deltaTime;
-            plank.transform.position = Vector3.Lerp(initialPos, initialPos + new Vector3(-1, 0, 0), time);
+            plank.transform.position = Vector3.Lerp(initialPos, initialPos + new Vector3(0, 0, 1), time);
             yield return null;
         }
 

@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class NextLevelDetector : MonoBehaviour
 {
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PlayerObj"))
         {
-            GameManager.instance.GoToNextLevel();
+            AsyncManager.Instance.loadingScreen.GetComponentInChildren<Animator>().SetTrigger("FadeIn");
+            AsyncManager.Instance.LoadLevel("LevelTwo");
         }
     }
-
-
 }

@@ -36168,10 +36168,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2768857561330305778, guid: babbd952a91f5044985ce22c9c83cc77, type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2862622432051702286, guid: babbd952a91f5044985ce22c9c83cc77, type: 3}
       propertyPath: m_Name
       value: InteractableDoor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8046012360916392818, guid: babbd952a91f5044985ce22c9c83cc77, type: 3}
+      propertyPath: closingDoorSFX
+      value: 
+      objectReference: {fileID: 862391048}
+    - target: {fileID: 8046012360916392818, guid: babbd952a91f5044985ce22c9c83cc77, type: 3}
+      propertyPath: openingDoorSFX
+      value: 
+      objectReference: {fileID: 862391049}
     - target: {fileID: 8046012360916392818, guid: babbd952a91f5044985ce22c9c83cc77, type: 3}
       propertyPath: playerCanInteract
       value: 0
@@ -39966,6 +39978,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1381171283846974547, guid: babbd952a91f5044985ce22c9c83cc77, type: 3}
   m_PrefabInstance: {fileID: 777904793}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &862391048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5986343560850786556, guid: babbd952a91f5044985ce22c9c83cc77, type: 3}
+  m_PrefabInstance: {fileID: 777904793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7751f5be5ba1b814abd3030f2829c2c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &862391049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 127213448895241752, guid: babbd952a91f5044985ce22c9c83cc77, type: 3}
+  m_PrefabInstance: {fileID: 777904793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7751f5be5ba1b814abd3030f2829c2c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &862596148 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1865994460292271754, guid: 677138949351fdc478201dc3ef039f80, type: 3}
@@ -46921,7 +46955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 453666226563938128, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_audioClip
@@ -99836,6 +99870,10 @@ PrefabInstance:
     - target: {fileID: 2567420997749143887, guid: 59b930a48a373e64390629e498a5929f, type: 3}
       propertyPath: m_Name
       value: LockedFence
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774276213655810793, guid: 59b930a48a373e64390629e498a5929f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5609565483411830939, guid: 59b930a48a373e64390629e498a5929f, type: 3}
       propertyPath: m_LocalScale.x

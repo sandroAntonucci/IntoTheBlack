@@ -7,6 +7,7 @@ public class PatrolBehaviour : MonoBehaviour
 {
 
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource followingAudioSFX;
 
     private const float minRemainingDistance = 0.5f;
 
@@ -30,6 +31,24 @@ public class PatrolBehaviour : MonoBehaviour
         vision = GetComponentInChildren<EnemyVision>();
     }
 
+    private IEnumerator PlayFollowingSound()
+    {
+        while(followingAudioSFX.volume < 0.3)
+        {
+            followingAudioSFX.volume += 0.03f;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private IEnumerator StopFollowingSound()
+    {
+        while (followingAudioSFX.volume > 0)
+        {
+            followingAudioSFX.volume -= 0.03f;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     private void Update()
     {
         if (vision.PlayerInSight)
@@ -41,6 +60,7 @@ public class PatrolBehaviour : MonoBehaviour
             // Effects to the player
             PlayerCam.Instance.ChangeFOV(90f);
             GrainEffect.Instance.FrightEffect();
+            StartCoroutine(PlayFollowingSound());
 
             return;
         }
@@ -49,6 +69,7 @@ public class PatrolBehaviour : MonoBehaviour
             // Effects to the player
             PlayerCam.Instance.ChangeFOV(60f);
             GrainEffect.Instance.StopFrightEffect();
+            StartCoroutine(StopFollowingSound());
 
             agent.speed = speed;
         }

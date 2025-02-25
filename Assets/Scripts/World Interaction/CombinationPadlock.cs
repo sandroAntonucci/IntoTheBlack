@@ -29,6 +29,7 @@ public class CombinationPadlock : MonoBehaviour
     [SerializeField] private AudioManager changeNumberSFX;
     [SerializeField] private AudioManager errorNumberSFX;
     [SerializeField] private AudioManager correctNumberSFX;
+    [SerializeField] private AudioManager openGateSFX;
 
     private int[] inputCode;
     private Animator animator;
@@ -180,7 +181,11 @@ public class CombinationPadlock : MonoBehaviour
 
         Destroy(gameObject);
 
-        if(isGate) door.GetComponent<Animator>().Play("Door_Open");
+        if (isGate)
+        {
+            door.GetComponent<Animator>().Play("Door_Open");
+            openGateSFX.PlayRandomSoundOnce();
+        }
         else
         {
             door.GetComponent<InteractableDoor>().isLocked = false;

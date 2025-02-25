@@ -34,6 +34,11 @@ public class AudioManager : MonoBehaviour
         audioPlayed.Play();
     }
 
+    public IEnumerator PlayRandomSoundWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        PlayRandomSoundOnce();
+    }
 
     public void StartRandomSound()
     {

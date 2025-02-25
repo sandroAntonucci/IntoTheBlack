@@ -42,7 +42,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     {
         SetActiveCanvas(null);
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("TomasScene");
+        GameManager.instance.GoToNextLevel();
     }
 
     public void GoToGame()

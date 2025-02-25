@@ -6,8 +6,11 @@ using TMPro;
 public class InteractableDoor : MonoBehaviour
 {
 
+    [SerializeField] private AudioManager openingDoorSFX;
+    [SerializeField] private AudioManager closingDoorSFX;
+
     private Animator doorAnimator;
-    
+
     public bool playerCanInteract;
     private bool isOpen = false;
     private string currentText = "[E] to Open";
@@ -44,12 +47,14 @@ public class InteractableDoor : MonoBehaviour
 
             if (isOpen)
             {
+                StartCoroutine(closingDoorSFX.PlayRandomSoundWithDelay(0.45f));
                 currentText = "[E] to Open";
                 doorAnimator.SetBool("isOpen", false);
                 isOpen = false;
             }
             else
             {
+                openingDoorSFX.PlayRandomSoundOnce();
                 currentText = "[E] to Close";
                 doorAnimator.SetBool("isOpen", true);
                 isOpen = true;
@@ -68,7 +73,7 @@ public class InteractableDoor : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false;
         playerCanInteract = false;
         PlayerInterface.Instance.TextToPlayer.text = "";
-        yield return new WaitForSeconds(0.65f);
+        yield return new WaitForSeconds(0.5f);
         gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 

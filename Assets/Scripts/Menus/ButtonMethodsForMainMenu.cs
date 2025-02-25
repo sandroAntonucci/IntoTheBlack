@@ -4,6 +4,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using TMPro;
 using UnityEngine.Networking;
+using UnityEditor.PackageManager.Requests;
 
 public class ButtonMethodsForMainMenu : MonoBehaviour
 {
@@ -89,32 +90,13 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         string username = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
         string password = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[2].text;
 
-        StartCoroutine(RegisterUser(username, password, email));
-    }
-    public IEnumerator RegisterUser(string username, string password, string email)
-    {
-        string url = "http://localhost:8080/auth/register";
-        string jsonData = $"{{\"username\":\"{username}\",\"password\":\"{password}\",\"email\":\"{email}\"}}";
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-        UnityWebRequest request = new UnityWebRequest(url, "POST");
-        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            RegisterPage.GetComponentsInChildren<TextMeshProUGUI>()[1].color = Color.green;
-            RegisterPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = "User Registered!";
-            yield return new WaitForSeconds(2);
-            ReturnMainMenu();
-        }
-        else
-        {
-            string errorMessage = request.downloadHandler.text;
-            RegisterPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = errorMessage;
-        }
+        AuthCRUD authCRUD = new AuthCRUD();
+        RegisterRequest request = new RegisterRequest(username, password, email);
+        StartCoroutine(authCRUD.Register(
+            request,
+            GoToGame,
+            error => RegisterPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = error
+        ));
     }
 
     public IEnumerator Waiter(int timer)
@@ -128,7 +110,12 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         string password = LoginPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
         
         AuthCRUD authCRUD = new AuthCRUD();
-        UserRequestDTO userRequestDTO = new UserRequestDTO(username, password);
-        StartCoroutine(authCRUD.Login(userRequestDTO));
+        LoginRequest request = new LoginRequest(username, password);
+
+        StartCoroutine(authCRUD.Login(
+            request,
+            GoToGame,
+            error => LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = error
+        ));
     }
 }

@@ -48,6 +48,7 @@ public class ClosetHide : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().rb.velocity = Vector3.zero;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
+        GameObject.FindGameObjectWithTag("PlayerObj").GetComponent<CapsuleCollider>().enabled = false;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = false;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ItemBobbing>().enabled = false;
         GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = false;
@@ -62,6 +63,9 @@ public class ClosetHide : MonoBehaviour
         anim.Play("Closet_Open");
 
         yield return new WaitForSeconds(cameraInside.duration);
+
+        PlayerCam.Instance.ChangeFOV(60f);
+        GrainEffect.Instance.StopFrightEffect();
 
         playerInsideCloset = true;
 
@@ -80,8 +84,9 @@ public class ClosetHide : MonoBehaviour
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
+        GameObject.FindGameObjectWithTag("PlayerObj").GetComponent<CapsuleCollider>().enabled = true;
         GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ItemBobbing>().enabled = true; 
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ItemBobbing>().enabled = true;
 
         playerInsideCloset = false;
 

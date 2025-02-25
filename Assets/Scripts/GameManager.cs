@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        SceneManager.LoadScene(gameObject.scene.buildIndex + 1);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
     void Update()

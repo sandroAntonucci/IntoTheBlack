@@ -81,7 +81,7 @@ public class ClosetHide : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
         GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ItemBobbing>().enabled = true;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ItemBobbing>().enabled = true; 
 
         playerInsideCloset = false;
 

@@ -41,10 +41,10 @@ AudioSource:
   m_GameObject: {fileID: 4337822394958283388}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 5962d2d8885b50c42b9497c18a469719, type: 2}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4737b01c1117d82459cae903c5a03fbf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -141,9 +141,11 @@ GameObject:
   - component: {fileID: 3569373865952601311}
   - component: {fileID: 5977452932679560719}
   - component: {fileID: 5420541268195127319}
+  - component: {fileID: 5337718853185655783}
+  - component: {fileID: 1693233041885126584}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +160,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.95, z: 0}
-  m_LocalScale: {x: 0.57574, y: 0.57574, z: 0.57574}
+  m_LocalScale: {x: 0.86577207, y: 0.5870774, z: 0.80459666}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5594968841907918377}
@@ -175,8 +177,8 @@ Rigidbody:
   m_GameObject: {fileID: 5623215663277445355}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 6
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -205,17 +207,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a85754b9e513441b7dd21c0732bb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 8
-  runningSpeed: 12
+  baseMoveSpeed: 2
+  runningSpeed: 5
   playerHeight: 2
-  crouchHeight: 1
-  crouchSpeed: 2
+  crouchHeight: 1.2
+  crouchSpeed: 1.5
   playerModel: {fileID: 7684808286484679424}
   orientation: {fileID: 5594968841907918377}
   playerStamina: {fileID: 5977452932679560719}
-  walkSFX: {fileID: 5420541268195127319}
+  footstepsSFX: {fileID: 5420541268195127319}
   isRunning: 0
   moveDirection: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
+  maxSlopeAngle: 80
 --- !u!114 &5977452932679560719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,8 +233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxStamina: 100
-  staminaRecoveryRate: 30
-  staminaUseRate: 40
+  staminaRecoveryRate: 25
+  staminaUseRate: 20
   playerMovement: {fileID: 3569373865952601311}
   currentStamina: 0
   hasStamina: 0
@@ -247,10 +251,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioPlayed: {fileID: 453666226563938128}
-  clips:
-  - {fileID: 8300000, guid: dc72a9f714f1aed4699e75d24efb7478, type: 3}
-  - {fileID: 8300000, guid: 54700af788116e440a8fa5cd443dde61, type: 3}
-  - {fileID: 8300000, guid: baac117377912594faf672e0fab6dd3c, type: 3}
+--- !u!114 &5337718853185655783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5623215663277445355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12af2fa0ff35846489a338c3221fc80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundRayDistance: 1.3
+  extraGravity: 50
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!114 &1693233041885126584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5623215663277445355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de2f7feb71faa4d49932d0a0de2533a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentOrientation: {fileID: 5706416594881403533}
+  itemHolder: {fileID: 0}
+  currentItem: {fileID: 0}
 --- !u!1 &5706416594881403533
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +325,7 @@ GameObject:
   - component: {fileID: 7676111662018526169}
   m_Layer: 7
   m_Name: CameraPos
-  m_TagString: Untagged
+  m_TagString: CameraPosition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,7 +339,7 @@ Transform:
   m_GameObject: {fileID: 7189288139104204225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5500001, z: 0}
+  m_LocalPosition: {x: 0, y: 0.557, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -327,7 +359,7 @@ GameObject:
   - component: {fileID: 5944187917024533305}
   m_Layer: 7
   m_Name: PlayerObj
-  m_TagString: Player
+  m_TagString: PlayerObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,7 +374,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1.0648}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7676111662018526169}
@@ -417,7 +449,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.4613121
+  m_Height: 1.9964883
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

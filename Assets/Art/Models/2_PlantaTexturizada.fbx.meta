@@ -3,7 +3,37 @@ guid: 6b2cabe0bb4385349b4338f7d442c0df
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 5e7ecb1d4ba351643a87135754bb30ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.025
+    second: {fileID: 2100000, guid: 2f63bdd651bf46d43a8fb428c12404b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.026
+    second: {fileID: 2100000, guid: bd23da383433e54458284eb0739cf3aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.028
+    second: {fileID: 2100000, guid: 22bf2bd74c1c7db4b9c1846fd2c484c0, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ParedITB
+    second: {fileID: 2800000, guid: d039251c253b4b346974f346ba5570f9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SueloITB
+    second: {fileID: 2800000, guid: 2e9b748ef848a74418b2ad2f2cddeb6e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

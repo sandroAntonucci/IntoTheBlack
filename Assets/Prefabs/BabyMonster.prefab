@@ -142,7 +142,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b5e573d7f3cc55447a52faaf552c4a2f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1030865695929415022}
   followingAudioSFX: {fileID: 1795830530911927866}
-  speed: 1
+  speed: 1.5
   waitTime: 2
   target: {fileID: 0}
   waypoints:

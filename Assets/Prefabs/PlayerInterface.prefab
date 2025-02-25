@@ -271,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStamina: {fileID: 8067406438349323127}
   TextToPlayer: {fileID: 870488472312703268}
+  ErrorText: {fileID: 2863066502128669018}
 --- !u!1 &3136565827174363737
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,8 +364,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -545,7 +546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: a
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bf9b4c13799742941a833918119fe842, type: 2}
   m_sharedMaterial: {fileID: 6379010118186880629, guid: bf9b4c13799742941a833918119fe842, type: 2}
@@ -572,8 +573,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

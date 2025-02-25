@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InteractableCollectable : MonoBehaviour
 {
+    public bool isCollectable;
+    [SerializeField, HideInInspector] private int id;
 
     [SerializeField] private MoveMenuCamera cameraZoomIn;
     [SerializeField] private MoveMenuCamera cameraZoomOut;

@@ -49,6 +49,7 @@ public class ClosetHide : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().rb.velocity = Vector3.zero;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = false;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ItemBobbing>().enabled = false;
         GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = false;
 
         StartCoroutine(cameraInside.CameraMovement());
@@ -80,6 +81,7 @@ public class ClosetHide : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = true;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCam>().enabled = true;
         GameObject.FindGameObjectWithTag("PlayerInterface").GetComponent<Canvas>().enabled = true;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ItemBobbing>().enabled = true;
 
         playerInsideCloset = false;
 

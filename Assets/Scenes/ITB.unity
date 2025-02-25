@@ -3046,6 +3046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensX: 400
   sensY: 400
+  fovSpeed: 5
   orientation: {fileID: 1207039044}
 --- !u!81 &931682462
 AudioListener:
@@ -6077,7 +6078,7 @@ Transform:
   m_GameObject: {fileID: 1919374656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -49.6, y: -1.7, z: -45}
+  m_LocalPosition: {x: -50, y: -2, z: -45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

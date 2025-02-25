@@ -54,7 +54,7 @@ public class PatrolBehaviour : MonoBehaviour
         if (vision.PlayerInSight)
         {
             agent.SetDestination(target.transform.position);
-            agent.speed = speed * 4f; // Aumenta su velocidad
+            agent.speed = speed * 3f; // Aumenta su velocidad
             animator.SetFloat("WalkingSpeed", agent.velocity.magnitude);
 
             // Effects to the player

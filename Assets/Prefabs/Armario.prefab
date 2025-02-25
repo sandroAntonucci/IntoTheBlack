@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 684137480261863397}
   - component: {fileID: 1819449648391482943}
   - component: {fileID: 6517992314437790109}
+  - component: {fileID: 986320197806755553}
   m_Layer: 0
   m_Name: Armario
   m_TagString: Untagged
@@ -674,7 +675,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionText: {fileID: 5791938641492442570}
-  cameraInside: {fileID: 0}
+  cameraInside: {fileID: 6517992314437790109}
+  cameraOutside: {fileID: 986320197806755553}
+  playerOpeningCloset: 0
 --- !u!65 &684137480261863397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -694,8 +697,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.90342903, y: 1.7164652, z: 1.240551}
-  m_Center: {x: -0.048285484, y: 1.0018097, z: 0.80335045}
+  m_Size: {x: 0.68065643, y: 1.7164652, z: 1.1276264}
+  m_Center: {x: 0.0010032654, y: 1.0018097, z: 0.74688816}
 --- !u!95 &1819449648391482943
 Animator:
   serializedVersion: 5
@@ -736,7 +739,27 @@ MonoBehaviour:
   finalCameraPos: {x: 0, y: 0, z: 0}
   initialCameraRotation: {x: 0, y: 0, z: 0}
   finalCameraRotation: {x: 0, y: 0, z: 0}
-  duration: 1
+  duration: 0.5
+--- !u!114 &986320197806755553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7867500920531917113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f24f36e13266d4e8ee9183108bfe18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isZooming: 0
+  finalPositionReference: {fileID: 0}
+  initialPositionReference: {fileID: 8064761072370239978}
+  initialCameraPos: {x: 0, y: 0, z: 0}
+  finalCameraPos: {x: 0, y: 0, z: 0}
+  initialCameraRotation: {x: 0, y: 0, z: 0}
+  finalCameraRotation: {x: 0, y: 0, z: 0}
+  duration: 0.5
 --- !u!1 &8064761072370239978
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,13 +784,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8064761072370239978}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.542, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.542, z: -0.372}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7378350619589690243}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8997142622112078629
 GameObject:
   m_ObjectHideFlags: 0

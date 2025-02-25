@@ -54,24 +54,32 @@ public class PatrolBehaviour : MonoBehaviour
         if (vision.PlayerInSight)
         {
             agent.SetDestination(target.transform.position);
-            agent.speed = speed * 3f; // Aumenta su velocidad
-            animator.SetFloat("WalkingSpeed", agent.velocity.magnitude);
 
             // Effects to the player
             PlayerCam.Instance.ChangeFOV(90f);
             GrainEffect.Instance.FrightEffect();
             StartCoroutine(PlayFollowingSound());
 
+            agent.speed = speed * 3f; // Aumenta su velocidad
+            animator.SetFloat("WalkingSpeed", agent.velocity.magnitude);
+
+
             return;
         }
         else
         {
+
+
             // Effects to the player
             PlayerCam.Instance.ChangeFOV(60f);
             GrainEffect.Instance.StopFrightEffect();
             StartCoroutine(StopFollowingSound());
 
             agent.speed = speed;
+
+
+
+
         }
 
         if (agent.remainingDistance <= minRemainingDistance && !agent.pathPending && !isWaiting)

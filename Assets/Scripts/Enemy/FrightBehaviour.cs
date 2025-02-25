@@ -8,7 +8,7 @@ public class FrightBehaviour : MonoBehaviour
 
     [SerializeField] private AudioSource jumpscareSFX;
 
-    private const string PlayerTag = "Player";
+    private const string PlayerTag = "PlayerObj";
     private const float time = 2f;
     public Camera frightCamera;
 
@@ -28,7 +28,7 @@ public class FrightBehaviour : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag(PlayerTag))
         {

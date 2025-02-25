@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractableCollectable : MonoBehaviour
 {
     public bool isCollectable;
-    [SerializeField, HideInInspector] private int id;
+    [SerializeField] private int id;
 
     [SerializeField] private MoveMenuCamera cameraZoomIn;
     [SerializeField] private MoveMenuCamera cameraZoomOut;
@@ -39,6 +39,11 @@ public class InteractableCollectable : MonoBehaviour
     {
         if (playerCanInteract && Input.GetKeyDown(KeyCode.E) && !cameraZoom)
         {
+            if(isCollectable)
+            {
+                GameManager.Instance.PlayerFragments.Add(id);
+                isCollectable = false;
+            }
 
             if (!playerIsInteracting)
             {

@@ -6,25 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
+
+    private User user;
     public float timer;
     private List<int> fragments = new List<int>();
 
-    public List<int> PlayerFragments
-    {
-        get { return fragments; }
-        set { fragments = value; }
-    }
+    public User User { get => user; set => user = value; }
+    public List<int> PlayerFragments { get => fragments; set => fragments = value; }
 
     public void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
     }

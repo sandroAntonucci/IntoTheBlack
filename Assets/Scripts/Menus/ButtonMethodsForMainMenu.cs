@@ -42,7 +42,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     {
         SetActiveCanvas(null);
         yield return new WaitForSeconds(0.5f);
-        GameManager.instance.GoToNextLevel();
+        GameManager.Instance.GoToNextLevel();
     }
 
     public void GoToGame()
@@ -126,34 +126,9 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     {
         string username = LoginPage.GetComponentsInChildren<TMPro.TMP_InputField>()[0].text;
         string password = LoginPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
-
-        StartCoroutine(LoginRequest(username, password));
-    }
-
-    public IEnumerator LoginRequest(string username, string password)
-    {
-        string url = "http://localhost:8080/auth/login";
-        string jsonData = $"{{\"username\":\"{username}\",\"password\":\"{password}\"}}";
-
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-        UnityWebRequest request = new UnityWebRequest(url, "POST");
-        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-        request.downloadHandler = new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].color = Color.green;
-            LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = "Login successful!";
-            yield return new WaitForSeconds(2);
-            GoToGame();
-        }
-        else
-        {
-            string errorMessage = request.downloadHandler.text;
-            LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = errorMessage;
-        }
+        
+        AuthCRUD authCRUD = new AuthCRUD();
+        UserRequestDTO userRequestDTO = new UserRequestDTO(username, password);
+        StartCoroutine(authCRUD.Login(userRequestDTO));
     }
 }

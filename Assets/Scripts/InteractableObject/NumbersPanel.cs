@@ -8,6 +8,9 @@ public class FusePanel : InteractableObject
 
     private Animator anim;
 
+    [SerializeField] private GameObject finalDoor;
+    [SerializeField] private AudioSource openDoorSFX;
+
     private int currentFuses = 0;
 
     private void Start()
@@ -30,6 +33,9 @@ public class FusePanel : InteractableObject
             anim.Play("AddFuseThree");
             gameObject.GetComponent<BoxCollider>().enabled = false;
             gameObject.GetComponent<CheckItem>().enabled = false;
+            PlayerInterface.Instance.TextToPlayer.text = "";
+            finalDoor.GetComponent<Animator>().Play("Door_Open");
+            openDoorSFX.Play();
         }
 
         currentFuses++;

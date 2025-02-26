@@ -15,7 +15,6 @@ public class RequestMethods
         request.SetRequestHeader("Content-Type", "application/json");
         if (!string.IsNullOrEmpty(token))
         {
-            Debug.Log($"Bearer {token}");
             request.SetRequestHeader("Authorization", $"Bearer {token}");
         }
     }
@@ -81,24 +80,11 @@ public class RequestMethods
         }
     }
 
-    public static IEnumerator PutRequest<T>(string url, string body, Action<T> onSuccess, Action<string> onError, string token) where T : class
-    {
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(body);
-
-        using (UnityWebRequest request = UnityWebRequest.Put(url, bodyRaw))
-        {
-            SetHeaders(request, token);
-
-            yield return request.SendWebRequest();
-
-            HandleResponse(request, ref onSuccess, ref onError);
-        }
-    }
-
     public static IEnumerator PutRequest<T>(string url, Action<T> onSuccess, Action<string> onError, string token) where T : class
     {
         using (UnityWebRequest request = new UnityWebRequest(url, "PUT"))
         {
+            request.downloadHandler = new DownloadHandlerBuffer();
             SetHeaders(request, token);
 
             yield return request.SendWebRequest();
@@ -112,6 +98,7 @@ public class RequestMethods
     {
         using (UnityWebRequest request = UnityWebRequest.Delete(url))
         {
+            request.downloadHandler = new DownloadHandlerBuffer();
             SetHeaders(request, token);
 
             yield return request.SendWebRequest();

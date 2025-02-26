@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -37,5 +38,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+    }
+
+    public static string FloatToHMS(float seconds)
+    {
+        TimeSpan time = TimeSpan.FromSeconds((int)seconds);
+        return string.Format("{0:D2}:{1:D2}:{2:D2}", time.Hours, time.Minutes, time.Seconds);
     }
 }

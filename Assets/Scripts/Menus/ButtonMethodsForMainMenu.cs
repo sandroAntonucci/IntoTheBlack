@@ -109,7 +109,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         
         StartCoroutine(AuthCRUD.Login(
             new LoginRequest(username, password),
-            GoToGame,
+            CreateNewPlayer,
             error => LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = error
         ));
     }
@@ -118,6 +118,41 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     {
         StartCoroutine(PlayerCRUD.CreatePlayer(
             GameManager.Instance.AuthUser.user,
+            SelectPlayer,
+            error => Debug.LogError(error)
+        ));
+    }
+
+    public void UpdateRecordTime()
+    {
+        StartCoroutine(PlayerCRUD.UpdateRecordTime(
+            AddFragmentToPlayer,
+            error => Debug.LogError(error)
+        ));
+    }
+
+    public void AddFragmentToPlayer()
+    {
+        StartCoroutine(PlayerCRUD.AddFragmentToPlayer(
+            "2",
+            SelectPlayer,
+            error => Debug.LogError(error)
+        ));
+    }
+
+    public void SelectPlayer()
+    {
+        StartCoroutine(PlayerCRUD.SelectPlayer(
+            GameManager.Instance.CurrentPlayer.id,
+            DeletePlayer,
+            error => Debug.LogError(error)
+        ));
+    }
+
+    public void DeletePlayer()
+    {
+        StartCoroutine(PlayerCRUD.DeletePlayer(
+            GameManager.Instance.CurrentPlayer.id,
             GoToGame,
             error => Debug.LogError(error)
         ));

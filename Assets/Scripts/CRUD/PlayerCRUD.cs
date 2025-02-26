@@ -8,6 +8,41 @@ using UnityEditor.PackageManager.Requests;
 
 public class PlayerCRUD
 {
+    public static IEnumerator AddFragmentToPlayer(string fragmentId, Action onSuccess, Action<string> onError) 
+    {
+        string playerId = GameManager.Instance.CurrentPlayer.id.ToString();
+        string url = string.Format($"{Endpoints.ApiUrlCloud}{Endpoints.SaveFragmentOnPlayer}", playerId, fragmentId);
+
+        yield return RequestMethods.PostRequest<Player>(url, response =>
+        {
+            Debug.Log("Fragment ADDED: " + fragmentId);
+            GameManager.Instance.CurrentPlayer = response;
+            onSuccess?.Invoke();
+        }, error =>
+        {
+            onError?.Invoke(error);
+        }, GameManager.Instance.AuthUser.token);
+    }
+
+    public static IEnumerator UpdateRecordTime(Action onSuccess, Action<string> onError)
+    {
+        Player player = GameManager.Instance.CurrentPlayer;
+        float recordTimeInSeconds = GameManager.Instance.timer;
+        player.recordTime = GameManager.FloatToHMS(recordTimeInSeconds);
+
+        string url = string.Format($"{Endpoints.ApiUrlCloud}{Endpoints.PlayerTime}", player.id);
+        string finalUrl = $"{url}?recordTime={player.recordTime}";
+
+        yield return RequestMethods.PutRequest<Player>(finalUrl, response =>
+        {
+            Debug.Log("Record Time UPDATED: " + response.recordTime);
+            GameManager.Instance.CurrentPlayer = response;
+            onSuccess?.Invoke();
+        }, error =>
+        {
+            onError?.Invoke(error);
+        }, GameManager.Instance.AuthUser.token);
+    }
 
     public static IEnumerator CreatePlayer(UserData user, Action onSuccess, Action<string> onError)
     {

@@ -4,5 +4,5 @@ public class Player
 {
     public int id;
     public string recordTime;
-    public List<int> fragmentList;
+    public List<FragmentData> fragmentList;
 }

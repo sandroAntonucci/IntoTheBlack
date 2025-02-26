@@ -53,6 +53,22 @@ public class RequestMethods
         }
     }
 
+    public static IEnumerator PostRequest<T>(string url, Action<T> onSuccess, Action<string> onError, string token = null) where T : class
+    { 
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
+        {
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes("");
+
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            SetHeaders(request, token);
+
+            yield return request.SendWebRequest();
+
+            HandleResponse(request, ref onSuccess, ref onError);
+        }
+    }
+
     public static IEnumerator GetRequest<T>(string url, Action<T> onSuccess, Action<string> onError, string token) where T : class
     {
         using (UnityWebRequest request = UnityWebRequest.Get(url))
@@ -78,6 +94,19 @@ public class RequestMethods
             HandleResponse(request, ref onSuccess, ref onError);
         }
     }
+
+    public static IEnumerator PutRequest<T>(string url, Action<T> onSuccess, Action<string> onError, string token) where T : class
+    {
+        using (UnityWebRequest request = new UnityWebRequest(url, "PUT"))
+        {
+            SetHeaders(request, token);
+
+            yield return request.SendWebRequest();
+
+            HandleResponse(request, ref onSuccess, ref onError);
+        }
+    }
+
 
     public static IEnumerator DeleteRequest<T>(string url, Action<T> onSuccess, Action<string> onError, string token) where T : class
     {

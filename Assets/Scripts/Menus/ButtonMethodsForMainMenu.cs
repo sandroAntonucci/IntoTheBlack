@@ -109,7 +109,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         
         StartCoroutine(AuthCRUD.Login(
             new LoginRequest(username, password),
-            CreateNewPlayer,
+            GoToGame,
             error => LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = error
         ));
     }
@@ -119,7 +119,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         StartCoroutine(PlayerCRUD.CreatePlayer(
             GameManager.Instance.AuthUser.user,
             GoToGame,
-            error => Debug.Log(error)
+            error => Debug.LogError(error)
         ));
     }
 }

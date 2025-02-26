@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour
 
     public float timer;
     private User authUser;
-    private List<int> fragments = new List<int>();
+    private Player currentPlayer;
 
     public User AuthUser { get => authUser; set => authUser = value; }
-    public List<int> PlayerFragments { get => fragments; set => fragments = value; }
+    public Player CurrentPlayer { get => currentPlayer; set => currentPlayer = value; }
 
     public void Awake()
     {

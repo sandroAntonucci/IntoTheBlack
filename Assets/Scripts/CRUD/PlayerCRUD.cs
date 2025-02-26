@@ -8,21 +8,50 @@ using UnityEditor.PackageManager.Requests;
 
 public class PlayerCRUD
 {
+
     public static IEnumerator CreatePlayer(UserData user, Action onSuccess, Action<string> onError)
     {
-        string url = Endpoints.ApiUrlCloud + Endpoints.CreatePlayer;
-        string jsonData = JsonUtility.ToJson(user);
+        string url = Endpoints.ApiUrlCloud + Endpoints.Players;
+        string finalUrl = $"{url}?username={user.username}";
 
-        yield return RequestMethods.PostRequest<Player>(url, jsonData, response =>
+        yield return RequestMethods.PostRequest<Player>(finalUrl, response =>
+        {
+            Debug.Log("Player CREATED");
+            GameManager.Instance.CurrentPlayer = response;
+            onSuccess?.Invoke();
+        }, error =>
+        {
+            GameManager.Instance.CurrentPlayer = null;
+            onError?.Invoke(error);
+        }, GameManager.Instance.AuthUser.token);
+    }
+
+    public static IEnumerator SelectPlayer(int id, Action onSuccess, Action<string> onError)
+    {
+        string url = string.Format($"{Endpoints.ApiUrlCloud}{Endpoints.PlayersWithId}", id);
+        
+        yield return RequestMethods.GetRequest<Player>(url, response =>
+        {
+            Debug.Log("Player SELECTED: " + response.id);
+            onSuccess?.Invoke();
+        }, error =>
+        {
+            onError?.Invoke(error);
+        }, GameManager.Instance.AuthUser.token);
+    }
+
+    public static IEnumerator DeletePlayer(int id, Action onSuccess, Action<string> onError)
+    {
+        string url = string.Format($"{Endpoints.ApiUrlCloud}{Endpoints.PlayersWithId}", id);
+
+        yield return RequestMethods.DeleteRequest<string>(url, response =>
         {
             Debug.Log(response);
             onSuccess?.Invoke();
         }, error =>
         {
-            Debug.Log(error);
             onError?.Invoke(error);
         }, GameManager.Instance.AuthUser.token);
     }
-
 }
 

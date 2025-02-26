@@ -41,7 +41,7 @@ public class InteractableCollectable : MonoBehaviour
         {
             if(isCollectable)
             {
-                GameManager.Instance.PlayerFragments.Add(id);
+                GameManager.Instance.CurrentPlayer.fragmentList.Add(id);
                 isCollectable = false;
             }
 

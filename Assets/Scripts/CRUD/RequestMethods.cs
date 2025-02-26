@@ -26,6 +26,7 @@ public class RequestMethods
             string jsonResponse = request.downloadHandler.text;
             T response = JsonUtility.FromJson<T>(jsonResponse);
             onSuccess?.Invoke(response);
+
         }
         else
         {
@@ -94,7 +95,7 @@ public class RequestMethods
     }
 
 
-    public static IEnumerator DeleteRequest<T>(string url, Action<T> onSuccess, Action<string> onError, string token) where T : class
+    public static IEnumerator DeleteRequest(string url, Action<string> onSuccess, Action<string> onError, string token)
     {
         using (UnityWebRequest request = UnityWebRequest.Delete(url))
         {
@@ -103,7 +104,18 @@ public class RequestMethods
 
             yield return request.SendWebRequest();
 
-            HandleResponse(request, ref onSuccess, ref onError);
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string response = request.downloadHandler.text;
+                onSuccess?.Invoke(response);
+            }
+            else
+            {
+                string errorMessage = !string.IsNullOrEmpty(request.downloadHandler.text) ?
+                                                            request.downloadHandler.text :
+                                                            request.error;
+                onError?.Invoke(errorMessage);
+            }
         }
     }
 }

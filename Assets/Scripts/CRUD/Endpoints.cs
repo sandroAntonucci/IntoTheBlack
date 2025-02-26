@@ -16,7 +16,7 @@ public static class Endpoints
     public const string Players = "/players";
     public const string PlayerTime = Players + "/{0}/time";
     public const string ResetPlayerData = Players + "/{0}/reset-data";
-    public const string SaveFragmentOnPlayer = Players + "{0}/fragment/add/{1}";
+    public const string SaveFragmentOnPlayer = Players + "/{0}/fragment/add/{1}";
     public const string PlayersWithId = Players + "/{0}";
 
     // FRAGMENTS

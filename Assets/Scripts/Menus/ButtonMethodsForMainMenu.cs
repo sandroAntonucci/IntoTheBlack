@@ -123,6 +123,14 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         ));
     }
 
+    public void SelectPlayer()
+    {
+        StartCoroutine(PlayerCRUD.SelectPlayer(
+            GameManager.Instance.CurrentPlayer.id,
+            UpdateRecordTime,
+            error => Debug.LogError(error)
+        ));
+    }
     public void UpdateRecordTime()
     {
         StartCoroutine(PlayerCRUD.UpdateRecordTime(
@@ -140,21 +148,4 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         ));
     }
 
-    public void SelectPlayer()
-    {
-        StartCoroutine(PlayerCRUD.SelectPlayer(
-            GameManager.Instance.CurrentPlayer.id,
-            DeletePlayer,
-            error => Debug.LogError(error)
-        ));
-    }
-
-    public void DeletePlayer()
-    {
-        StartCoroutine(PlayerCRUD.DeletePlayer(
-            GameManager.Instance.CurrentPlayer.id,
-            GoToGame,
-            error => Debug.LogError(error)
-        ));
-    }
 }

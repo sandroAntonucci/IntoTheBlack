@@ -13,7 +13,9 @@ public class PlayerCRUD
         string playerId = GameManager.Instance.CurrentPlayer.id.ToString();
         string url = string.Format($"{Endpoints.ApiUrlCloud}{Endpoints.SaveFragmentOnPlayer}", playerId, fragmentId);
 
-        yield return RequestMethods.PostRequest<Player>(url, response =>
+        Debug.Log("URL_" + url);
+
+        yield return RequestMethods.PutRequest<Player>(url, response =>
         {
             Debug.Log("Fragment ADDED: " + fragmentId);
             GameManager.Instance.CurrentPlayer = response;
@@ -79,7 +81,7 @@ public class PlayerCRUD
     {
         string url = string.Format($"{Endpoints.ApiUrlCloud}{Endpoints.PlayersWithId}", id);
 
-        yield return RequestMethods.DeleteRequest<string>(url, response =>
+        yield return RequestMethods.DeleteRequest(url, response =>
         {
             Debug.Log(response);
             onSuccess?.Invoke();

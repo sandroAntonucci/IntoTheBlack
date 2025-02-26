@@ -90,10 +90,8 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         string username = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
         string password = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[2].text;
 
-        AuthCRUD authCRUD = new AuthCRUD();
-        RegisterRequest request = new RegisterRequest(username, password, email);
-        StartCoroutine(authCRUD.Register(
-            request,
+        StartCoroutine(AuthCRUD.Register(
+            new RegisterRequest(username, password, email),
             GoToGame,
             error => RegisterPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = error
         ));
@@ -109,13 +107,19 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         string username = LoginPage.GetComponentsInChildren<TMPro.TMP_InputField>()[0].text;
         string password = LoginPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
         
-        AuthCRUD authCRUD = new AuthCRUD();
-        LoginRequest request = new LoginRequest(username, password);
-
-        StartCoroutine(authCRUD.Login(
-            request,
-            GoToGame,
+        StartCoroutine(AuthCRUD.Login(
+            new LoginRequest(username, password),
+            CreateNewPlayer,
             error => LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = error
+        ));
+    }
+
+    public void CreateNewPlayer()
+    {
+        StartCoroutine(PlayerCRUD.CreatePlayer(
+            GameManager.Instance.AuthUser.user,
+            GoToGame,
+            error => Debug.Log(error)
         ));
     }
 }

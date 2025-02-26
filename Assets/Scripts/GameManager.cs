@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private User authUser;
     public float timer;
+    private User authUser;
     private List<int> fragments = new List<int>();
 
     public User AuthUser { get => authUser; set => authUser = value; }

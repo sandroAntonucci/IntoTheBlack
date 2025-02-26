@@ -8,41 +8,33 @@ using UnityEditor.PackageManager.Requests;
 
 public class AuthCRUD
 {
-    public IEnumerator Login(LoginRequest data, Action onSuccess, Action<string> onError)
+    private static IEnumerator AuthRequest<T>(string endpoint, T data, Action onSuccess, Action<string> onError) where T : class
     {
-        string url = Endpoints.ApiUrlCloud + Endpoints.Login;
+        string url = Endpoints.ApiUrlCloud + endpoint;
         string jsonData = JsonUtility.ToJson(data);
 
-        yield return RequestMethods.PostRequest<User>(url, jsonData, (response) =>
+        yield return RequestMethods.PostRequest<User>(url, jsonData, response =>
         {
             GameManager.Instance.AuthUser = response;
             onSuccess?.Invoke();
 
-            Debug.Log("Username: " + GameManager.Instance.AuthUser.user.username);
-            Debug.Log("Token: " + GameManager.Instance.AuthUser.token);
-        }, (error) =>
+            Debug.Log($"Username: {GameManager.Instance.AuthUser.user.username}");
+            Debug.Log($"Token: {GameManager.Instance.AuthUser.token}");
+        }, error =>
         {
             GameManager.Instance.AuthUser = null;
             onError?.Invoke(error);
         });
     }
 
-    public IEnumerator Register(RegisterRequest data, Action onSuccess, Action<string> onError)
+    public static IEnumerator Login(LoginRequest data, Action onSuccess, Action<string> onError)
     {
-        string url = Endpoints.ApiUrlCloud + Endpoints.Register;
-        string jsonData = JsonUtility.ToJson(data);
-
-        yield return RequestMethods.PostRequest<User>(url, jsonData, (response) =>
-        {
-            GameManager.Instance.AuthUser = response;
-            onSuccess?.Invoke();
-
-            Debug.Log("Username: " + GameManager.Instance.AuthUser.user.username);
-            Debug.Log("Token: " + GameManager.Instance.AuthUser.token);
-        }, (error) =>
-        {
-            GameManager.Instance.AuthUser = null;
-            onError?.Invoke(error);
-        });
+        yield return AuthRequest(Endpoints.Login, data, onSuccess, onError);
     }
+
+    public static IEnumerator Register(RegisterRequest data, Action onSuccess, Action<string> onError)
+    {
+        yield return AuthRequest(Endpoints.Register, data, onSuccess, onError);
+    }
+
 }

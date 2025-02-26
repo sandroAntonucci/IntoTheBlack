@@ -9,7 +9,7 @@ public static class Endpoints
     public const string Register = "/auth/register";
 
     // USERS
-
+    public const string GetUserPlayers = "/users/{0}/players";
 
     // PLAYERS
     public const string SaveTimePlayer = "/players/{0}/time";

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Fuse
   m_EditorClassIdentifier: 
   itemName: Fuse
-  itemModel: {fileID: 588263665492973926, guid: c24d80ec114a83b4a8d13d3277148786, type: 3}
+  itemModel: {fileID: 4658004350724844326, guid: 368e907bffae022438cac9acb40195f4, type: 3}

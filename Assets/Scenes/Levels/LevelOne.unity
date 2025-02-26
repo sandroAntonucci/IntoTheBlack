@@ -1646,13 +1646,14 @@ GameObject:
   - component: {fileID: 587712224}
   - component: {fileID: 587712223}
   - component: {fileID: 587712222}
+  - component: {fileID: 587712226}
   m_Layer: 5
   m_Name: LoadScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &587712222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1740,6 +1741,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &587712226
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587712221}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c573298ad6841d9428e50e243d930035, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &591567241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2136,7 +2158,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3063,7 +3085,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3649,15 +3671,15 @@ PrefabInstance:
       objectReference: {fileID: 1113285712}
     - target: {fileID: 5560713510968572225, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 119.784
+      value: 60.136
       objectReference: {fileID: 0}
     - target: {fileID: 5560713510968572225, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42.415
+      value: 42.35
       objectReference: {fileID: 0}
     - target: {fileID: 5560713510968572225, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.94
+      value: -4.806
       objectReference: {fileID: 0}
     - target: {fileID: 5560713510968572225, guid: 03ce81bfcb363d7419606822664e1a9d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5161,7 +5183,6 @@ GameObject:
   - component: {fileID: 1378039032}
   - component: {fileID: 1378039034}
   - component: {fileID: 1378039033}
-  - component: {fileID: 1378039035}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -5226,27 +5247,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378039031}
   m_CullTransparentMesh: 1
---- !u!95 &1378039035
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378039031}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e0444244dffb6e14a9f01fff1888e765, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1382989422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5405,7 +5405,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5442,7 +5442,7 @@ RectTransform:
   m_Father: {fileID: 625830309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NextLevelDetector : MonoBehaviour
 {
@@ -9,7 +10,23 @@ public class NextLevelDetector : MonoBehaviour
         if (other.CompareTag("PlayerObj"))
         {
             AsyncManager.Instance.loadingScreen.GetComponentInChildren<Animator>().SetTrigger("FadeIn");
-            AsyncManager.Instance.LoadLevel("LevelTwo");
+
+            int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            
+
+            AsyncManager.Instance.LoadLevel(GetSceneNameByIndex(sceneIndex));
         }
+
+    }
+
+    public static string GetSceneNameByIndex(int buildIndex)
+    {
+        string scenePath = SceneUtility.GetScenePathByBuildIndex(buildIndex);
+        if (!string.IsNullOrEmpty(scenePath))
+        {
+            string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+            return sceneName;
+        }
+        return null;
     }
 }

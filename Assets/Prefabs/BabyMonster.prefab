@@ -72,7 +72,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 887
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -425,7 +425,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 887
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -793,6 +793,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 179.91931
       objectReference: {fileID: 0}
+    - target: {fileID: 5646251326991634810, guid: 5984a894bf4ca774b8af53f59c60efff, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e656b75f4d861241858526a1047cd42, type: 2}
+    - target: {fileID: 5646251326991634810, guid: 5984a894bf4ca774b8af53f59c60efff, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 84f8437679f090e44a68a4cdbe8306b9, type: 2}
+    - target: {fileID: 5646251326991634810, guid: 5984a894bf4ca774b8af53f59c60efff, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 36f3b2b0f159b8a46a2180cbcbd14f3d, type: 2}
     - target: {fileID: 5702188401442216965, guid: 5984a894bf4ca774b8af53f59c60efff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -12.451
@@ -1156,10 +1168,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.45200667
+  m_Radius: 0.3976433
   m_Height: 1.1474342
   m_Direction: 1
-  m_Center: {x: 0, y: 0.4802384, z: 0.20847176}
+  m_Center: {x: 0.026072979, y: 0.4802384, z: 0.1801813}
 --- !u!4 &4501102403731226811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f7a1b526a01b71e4d95a23563a957e8f, type: 3}

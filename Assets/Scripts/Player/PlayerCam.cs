@@ -45,7 +45,6 @@ public class PlayerCam : MonoBehaviour
 
     public void ChangeFOV(float targetFOV)
     {
-        Debug.Log("This is working");
         Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, targetFOV, Time.deltaTime * fovSpeed);
     }
 

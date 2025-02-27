@@ -61,7 +61,7 @@ public class PatrolBehaviour : MonoBehaviour
             StartCoroutine(PlayFollowingSound());
 
             agent.speed = speed * 3f; // Aumenta su velocidad
-            animator.SetFloat("WalkingSpeed", agent.velocity.magnitude);
+            animator.SetFloat("WalkingSpeed", agent.velocity.magnitude / 2f);
 
 
             return;

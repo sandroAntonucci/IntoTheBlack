@@ -25,20 +25,12 @@ public class AsyncManagerMainMenu : MonoBehaviour
             loadingBar = GameObject.FindGameObjectWithTag("LoadScreenBar")?.GetComponent<Slider>();
             loadingText = GameObject.FindGameObjectWithTag("LoadScreenText")?.GetComponent<TextMeshProUGUI>();
         }
-
-        // 🔹 1. Verifica si se encontró loadingScreen
         if (loadingScreen != null)
         {
-            loadingScreen.SetActive(true); // 🔹 Activar el GameObject entero
+            loadingScreen.SetActive(true);
             Canvas loadingCanvas = loadingScreen.GetComponent<Canvas>();
             if (loadingCanvas != null) loadingCanvas.enabled = true;
         }
-        else
-        {
-            Debug.LogError("No se encontró la pantalla de carga. Asegúrate de que tiene el tag 'LoadScreen'.");
-        }
-
-        // 🔹 2. Desactivar canvas actual
         if (currentActiveCanvas != null)
             currentActiveCanvas.gameObject.SetActive(false);
 
@@ -52,20 +44,15 @@ public class AsyncManagerMainMenu : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.5f);
-
-        // 🔹 3. Desactivar todos los canvas excepto el nuevo
         Canvas[] allCanvases = FindObjectsOfType<Canvas>();
         foreach (Canvas canvas in allCanvases)
         {
             if (canvas != loadingScreen.GetComponent<Canvas>())
                 canvas.gameObject.SetActive(false);
         }
-
-        // 🔹 4. Activar el canvas final (SelectionPage)
         newCanvas.gameObject.SetActive(true);
         currentActiveCanvas = newCanvas;
 
-        // 🔹 5. Desactivar pantalla de carga
         if (loadingScreen != null)
         {
             loadingScreen.SetActive(false);

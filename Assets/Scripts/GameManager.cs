@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public float timer;
     private User authUser;
     private Player currentPlayer;
-
+    public GameObject loadingScreen;
     public User AuthUser { get => authUser; set => authUser = value; }
     public Player CurrentPlayer { get => currentPlayer; set => currentPlayer = value; }
 
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public void GoToNextLevel()
@@ -44,5 +45,21 @@ public class GameManager : MonoBehaviour
     {
         TimeSpan time = TimeSpan.FromSeconds((int)seconds);
         return string.Format("{0:D2}:{1:D2}:{2:D2}", time.Hours, time.Minutes, time.Seconds);
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        loadingScreen = GameObject.FindGameObjectWithTag("LoadScreen");
+
+        if (loadingScreen != null)
+        {
+            StartCoroutine(HideLoadingScreen());
+        }
+    }
+
+    private IEnumerator HideLoadingScreen()
+    {
+        yield return new WaitForSeconds(0.1f);
+        loadingScreen.SetActive(false);
     }
 }

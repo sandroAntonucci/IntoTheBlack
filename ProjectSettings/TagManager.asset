@@ -7,6 +7,9 @@ TagManager:
   - PlayerInterface
   - CameraPosition
   - PlayerObj
+  - LoadScreenText
+  - LoadScreenBar
+  - LoadScreen
   layers:
   - Default
   - TransparentFX

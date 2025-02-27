@@ -10,6 +10,7 @@ public class AsyncManager : MonoBehaviour
     public GameObject loadingScreen;
     public Slider loadingBar;
     public TextMeshProUGUI loadingText;
+    
     public static AsyncManager Instance;
 
 
@@ -24,13 +25,24 @@ public class AsyncManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+
+        loadingScreen = GameObject.FindGameObjectWithTag("LoadScreen");
+        loadingBar = GameObject.FindGameObjectWithTag("LoadScreenBar").GetComponent<Slider>();
+        loadingText = GameObject.FindGameObjectWithTag("LoadScreenText").GetComponent<TextMeshProUGUI>();
     }
+
     public void LoadLevel(string sceneName)
     {
+        loadingScreen = GameObject.FindGameObjectWithTag("LoadScreen");
+        loadingBar = GameObject.FindGameObjectWithTag("LoadScreenBar").GetComponent<Slider>();
+        loadingText = GameObject.FindGameObjectWithTag("LoadScreenText").GetComponent<TextMeshProUGUI>();
+
         StartCoroutine(WaitForFadeIn(0.30f));
         StartCoroutine(LoadLevelAsync(sceneName));
         StartCoroutine(LoadingText());
     }
+
     public IEnumerator LoadLevelAsync(string sceneName)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);

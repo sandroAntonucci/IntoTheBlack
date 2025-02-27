@@ -1122,7 +1122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   visionRange: 15
-  visionAngle: 90
+  visionAngle: 145
   timeToStopFollowingPlayer: 2.5
   obstacleLayer:
     serializedVersion: 2

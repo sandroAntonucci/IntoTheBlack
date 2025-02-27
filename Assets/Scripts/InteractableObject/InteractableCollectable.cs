@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractableCollectable : MonoBehaviour
 {
-    public bool isCollectable;
+    private bool isCollected = false;
     [SerializeField] private int id;
 
     [SerializeField] private MoveMenuCamera cameraZoomIn;
@@ -39,11 +39,14 @@ public class InteractableCollectable : MonoBehaviour
     {
         if (playerCanInteract && Input.GetKeyDown(KeyCode.E) && !cameraZoom)
         {
-            if(isCollectable)
+            if(!isCollected && GameManager.Instance.AuthUser != null)
             {
-                FragmentData fragment = new FragmentData(id);
-                GameManager.Instance.CurrentPlayer.fragmentList.Add(fragment);
-                isCollectable = false;
+                isCollected = true;
+
+                StartCoroutine(PlayerCRUD.AddFragmentToPlayer(id.ToString(), 
+                () => Debug.Log("Collected SUCCESSFULLY id: " + id), 
+                error => Debug.LogError(error)
+                ));
             }
 
             if (!playerIsInteracting)

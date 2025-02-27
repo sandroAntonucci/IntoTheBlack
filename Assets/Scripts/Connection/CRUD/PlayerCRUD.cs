@@ -13,8 +13,6 @@ public class PlayerCRUD
         string playerId = GameManager.Instance.CurrentPlayer.id.ToString();
         string url = string.Format($"{Endpoints.ApiUrlCloud}{Endpoints.SaveFragmentOnPlayer}", playerId, fragmentId);
 
-        Debug.Log("URL_" + url);
-
         yield return RequestMethods.PutRequest<Player>(url, response =>
         {
             Debug.Log("Fragment ADDED: " + fragmentId);
@@ -54,11 +52,9 @@ public class PlayerCRUD
         yield return RequestMethods.PostRequest<Player>(finalUrl, response =>
         {
             Debug.Log("Player CREATED");
-            GameManager.Instance.CurrentPlayer = response;
             onSuccess?.Invoke();
         }, error =>
         {
-            GameManager.Instance.CurrentPlayer = null;
             onError?.Invoke(error);
         }, GameManager.Instance.AuthUser.token);
     }
@@ -70,9 +66,11 @@ public class PlayerCRUD
         yield return RequestMethods.GetRequest<Player>(url, response =>
         {
             Debug.Log("Player SELECTED: " + response.id);
+            GameManager.Instance.CurrentPlayer = response;
             onSuccess?.Invoke();
         }, error =>
         {
+            GameManager.Instance.CurrentPlayer = null;
             onError?.Invoke(error);
         }, GameManager.Instance.AuthUser.token);
     }

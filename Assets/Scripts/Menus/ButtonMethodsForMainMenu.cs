@@ -12,6 +12,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     public Canvas LoginPage;
     public Canvas RegisterPage;
     public Canvas OptionsPage;
+    public Canvas SelectionPage;
     public MoveMenuCamera cameraScript;
 
     public Canvas currentActiveCanvas; 
@@ -48,6 +49,9 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
 
     public void GoToGame()
     {
+        GameManager.Instance.AuthUser = null;
+        GameManager.Instance.CurrentPlayer = null;
+        GameManager.Instance.timer = 0;
         StartCoroutine(GoToGameCoroutine());
     }
 
@@ -116,6 +120,6 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
 
     public void GoToPlayersScene()
     {
-        SceneManager.LoadScene("PlayerSelection");
+        SetActiveCanvas(SelectionPage);
     }
 }

@@ -23,10 +23,10 @@ public class RequestMethods
     {
         if (request.result == UnityWebRequest.Result.Success)
         {
+            Debug.Log(request.downloadHandler.text);
             string jsonResponse = request.downloadHandler.text;
             T response = JsonUtility.FromJson<T>(jsonResponse);
             onSuccess?.Invoke(response);
-
         }
         else
         {

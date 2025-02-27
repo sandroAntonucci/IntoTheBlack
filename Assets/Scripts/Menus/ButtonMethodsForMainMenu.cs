@@ -13,6 +13,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     public Canvas SelectionPage;
     public Canvas currentActiveCanvas;
     public GameObject eventSystemObject;
+    public AsyncManagerMainMenu asyncManagerMainMenu;
 
     private void Start()
     {
@@ -105,7 +106,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
             new LoginRequest(username, password),
             () =>
             {
-                eventSystemObject.gameObject.GetComponent<AsyncManager>().LoadLevel("PlayerSelection");
+                asyncManagerMainMenu.LoadCanvas(SelectionPage);
             },
             error =>
             {

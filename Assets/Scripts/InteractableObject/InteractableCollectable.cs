@@ -39,15 +39,23 @@ public class InteractableCollectable : MonoBehaviour
     {
         if (playerCanInteract && Input.GetKeyDown(KeyCode.E) && !cameraZoom)
         {
-            if(!isCollected && GameManager.Instance.AuthUser != null)
+            try
             {
-                isCollected = true;
+                if (!isCollected && GameManager.Instance.AuthUser != null)
+                {
+                    isCollected = true;
 
-                StartCoroutine(PlayerCRUD.AddFragmentToPlayer(id.ToString(), 
-                () => Debug.Log("Collected SUCCESSFULLY id: " + id), 
-                error => Debug.LogError(error)
-                ));
+                    StartCoroutine(PlayerCRUD.AddFragmentToPlayer(id.ToString(),
+                    () => Debug.Log("Collected SUCCESSFULLY id: " + id),
+                    error => Debug.LogError(error)
+                    ));
+                }
             }
+            catch
+            {
+                Debug.LogWarning("You are playing has guest");
+            }
+
 
             if (!playerIsInteracting)
             {

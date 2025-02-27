@@ -9,12 +9,13 @@ public class NextLevelDetector : MonoBehaviour
     {
         if (other.CompareTag("PlayerObj"))
         {
-            AsyncManager.Instance.loadingScreen.GetComponentInChildren<Animator>().SetTrigger("FadeIn");
 
             int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
             
 
             AsyncManager.Instance.LoadLevel(GetSceneNameByIndex(sceneIndex));
+
+            AsyncManager.Instance.loadingScreen.GetComponentInChildren<Animator>().SetTrigger("FadeIn");
         }
 
     }

@@ -27,9 +27,14 @@ public class AsyncManager : MonoBehaviour
         }
 
 
-        loadingScreen = GameObject.FindGameObjectWithTag("LoadScreen");
-        loadingBar = GameObject.FindGameObjectWithTag("LoadScreenBar").GetComponent<Slider>();
-        loadingText = GameObject.FindGameObjectWithTag("LoadScreenText").GetComponent<TextMeshProUGUI>();
+        if(GameObject.FindGameObjectWithTag("LoadScreen") != null)
+            loadingScreen = GameObject.FindGameObjectWithTag("LoadScreen");
+
+        if (GameObject.FindGameObjectWithTag("LoadScreenBar") != null)
+            loadingBar = GameObject.FindGameObjectWithTag("LoadScreenBar").GetComponent<Slider>();
+
+        if (GameObject.FindGameObjectWithTag("LoadScreenText") != null)
+            loadingText = GameObject.FindGameObjectWithTag("LoadScreenText").GetComponent<TextMeshProUGUI>();
     }
 
     public void LoadLevel(string sceneName)
@@ -46,7 +51,8 @@ public class AsyncManager : MonoBehaviour
     public IEnumerator LoadLevelAsync(string sceneName)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-        loadingScreen.SetActive(true);
+        loadingScreen.GetComponent<Canvas>().enabled = true;
+        loadingScreen.GetComponent<Animator>().enabled = true;
         operation.allowSceneActivation = false; 
 
         float fakeProgress = 0f; 

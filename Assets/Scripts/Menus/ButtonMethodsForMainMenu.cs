@@ -11,9 +11,8 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     public Canvas RegisterPage;
     public Canvas OptionsPage;
     public Canvas SelectionPage;
-    public MoveMenuCamera cameraScript;
-
-    public Canvas currentActiveCanvas; 
+    public Canvas currentActiveCanvas;
+    public GameObject eventSystemObject;
 
     private void Start()
     {
@@ -35,7 +34,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
 
     public void GoToOptions()
     {
-        StartCoroutine(OptionsCoroutine());
+        SetActiveCanvas(OptionsPage);
     }
 
     public IEnumerator GoToGameCoroutine()
@@ -53,18 +52,11 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         StartCoroutine(GoToGameCoroutine());
     }
 
-    public IEnumerator OptionsCoroutine()
-    {
-        SetActiveCanvas(null);
-        cameraScript.StartCoroutine(cameraScript.CameraMovement());
-        yield return new WaitForSeconds(2.3f);
-        SetActiveCanvas(OptionsPage);
-    }
-
     public void ReturnMainMenu()
     {
         if (currentActiveCanvas != null)
         {
+            currentActiveCanvas.gameObject.GetComponentsInChildren<TextMeshProUGUI>()[1].text = "";
             currentActiveCanvas.gameObject.SetActive(false);
         }
         MainMenu.gameObject.SetActive(true);
@@ -108,11 +100,17 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
     {
         string username = LoginPage.GetComponentsInChildren<TMPro.TMP_InputField>()[0].text;
         string password = LoginPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
-        
+
         StartCoroutine(AuthCRUD.Login(
             new LoginRequest(username, password),
-            GoToPlayersScene,
-            error => LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = error
+            () =>
+            {
+                eventSystemObject.gameObject.GetComponent<AsyncManager>().LoadLevel("PlayerSelection");
+            },
+            error =>
+            {
+                LoginPage.GetComponentsInChildren<TextMeshProUGUI>()[1].text = error;
+            }
         ));
     }
 

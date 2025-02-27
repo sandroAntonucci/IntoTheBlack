@@ -7,7 +7,7 @@ public static class Endpoints
     // AUTH
     public const string Auth = "/auth";
     public const string Login = Auth + "/login";
-    public const string Register = Auth + "/ register";
+    public const string Register = Auth + "/register";
 
     // USERS
     public const string GetUserPlayers = "/users/{0}/players";

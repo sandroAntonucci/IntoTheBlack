@@ -81,9 +81,9 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
 
     public void Register()
     {
-        string email = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[0].text;
-        string username = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
-        string password = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[2].text;
+        string username = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[0].text;
+        string password = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[1].text;
+        string email = RegisterPage.GetComponentsInChildren<TMPro.TMP_InputField>()[2].text;
 
         StartCoroutine(AuthCRUD.Register(
             new RegisterRequest(username, password, email),

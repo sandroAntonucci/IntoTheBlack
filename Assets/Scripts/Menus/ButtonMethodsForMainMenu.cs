@@ -50,7 +50,8 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
         GameManager.Instance.AuthUser = null;
         GameManager.Instance.CurrentPlayer = null;
         GameManager.Instance.timer = 0;
-        StartCoroutine(GoToGameCoroutine());
+        //StartCoroutine(GoToGameCoroutine());
+        AsyncManager.Instance.LoadLevel("LevelOne");
     }
 
     public void ReturnMainMenu()
@@ -106,7 +107,7 @@ public class ButtonMethodsForMainMenu : MonoBehaviour
             new LoginRequest(username, password),
             () =>
             {
-                asyncManagerMainMenu.LoadCanvas(SelectionPage);
+                AsyncManager.Instance.LoadCanvas(SelectionPage);
             },
             error =>
             {

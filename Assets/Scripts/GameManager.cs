@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
         if (loadingScreen != null)
         {
-            StartCoroutine(HideLoadingScreen());
+            //StartCoroutine(HideLoadingScreen());
         }
     }
 

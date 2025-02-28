@@ -37,17 +37,21 @@ public class AsyncManager : MonoBehaviour
             loadingText = GameObject.FindGameObjectWithTag("LoadScreenText").GetComponent<TextMeshProUGUI>();
     }
 
+
     public void LoadLevel(string sceneName)
     {
         loadingScreen = GameObject.FindGameObjectWithTag("LoadScreen");
-        loadingBar = GameObject.FindGameObjectWithTag("LoadScreenBar").GetComponent<Slider>();
-        loadingText = GameObject.FindGameObjectWithTag("LoadScreenText").GetComponent<TextMeshProUGUI>();
-
+        loadingBar = GameObject.FindGameObjectWithTag("LoadScreenBar")?.GetComponent<Slider>();
+        loadingText = GameObject.FindGameObjectWithTag("LoadScreenText")?.GetComponent<TextMeshProUGUI>();
         StartCoroutine(WaitForFadeIn(0.30f));
         StartCoroutine(LoadLevelAsync(sceneName));
         StartCoroutine(LoadingText());
     }
 
+    public void LoadCanvas(Canvas target)
+    {
+        StartCoroutine(LoadCanvasAsync(target));
+    }
     public IEnumerator LoadLevelAsync(string sceneName)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
@@ -69,6 +73,49 @@ public class AsyncManager : MonoBehaviour
             }
         }
     }
+    public IEnumerator LoadCanvasAsync(Canvas canvasGO)
+    {
+        if (loadingScreen == null)
+            loadingScreen = GameObject.FindGameObjectWithTag("LoadScreen");
+
+        if (loadingBar == null)
+            loadingBar = GameObject.FindGameObjectWithTag("LoadScreenBar")?.GetComponent<Slider>();
+
+        if (loadingText == null)
+            loadingText = GameObject.FindGameObjectWithTag("LoadScreenText")?.GetComponent<TextMeshProUGUI>();
+
+        loadingScreen.SetActive(true);
+        loadingScreen.GetComponent<Canvas>().enabled = true;
+
+        Animator animator = loadingScreen.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.enabled = true;
+            animator.Play("FadeIn");
+        }
+
+        float fakeProgress = 0f;
+        while (fakeProgress < 1f)
+        {
+            fakeProgress += Time.deltaTime * 0.3f;
+            loadingBar.value = fakeProgress;
+            loadingText.text = "Loading " + new string('.', (int)(fakeProgress * 3) % 3);
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+        Canvas[] allCanvases = FindObjectsOfType<Canvas>();
+        foreach (Canvas canvas in allCanvases)
+        {
+            if (canvas != loadingScreen.GetComponent<Canvas>())
+                canvas.gameObject.SetActive(false);
+        }
+
+        canvasGO.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        loadingScreen.SetActive(false);
+    }
+
     public IEnumerator WaitForFadeIn(float time)
     {
         yield return new WaitForSeconds(time);

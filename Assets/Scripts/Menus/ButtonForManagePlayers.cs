@@ -65,6 +65,7 @@ public class ButtonForManagePlayers : MonoBehaviour
     private void StartGame()
     {
         GameManager.Instance.timer = 0;
-        SceneManager.LoadScene("levelOne");
+        //SceneManager.LoadScene("levelOne");
+        AsyncManager.Instance.LoadLevel("levelOne");
     }
 }

@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerInterface
+  - CameraPosition
+  - PlayerObj
+  - LoadScreenText
+  - LoadScreenBar
+  - LoadScreen
   layers:
   - Default
   - TransparentFX
@@ -13,8 +19,8 @@ TagManager:
   - UI
   - Ground
   - Player
-  - 
-  - 
+  - Windows
+  - Enemy
   - 
   - 
   - 

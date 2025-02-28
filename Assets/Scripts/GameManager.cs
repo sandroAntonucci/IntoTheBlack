@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour
         {
             //StartCoroutine(HideLoadingScreen());
         }
+
+        if (scene.name == "FinalMenu")
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     private IEnumerator HideLoadingScreen()

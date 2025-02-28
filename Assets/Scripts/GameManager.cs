@@ -49,13 +49,6 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        loadingScreen = GameObject.FindGameObjectWithTag("LoadScreen");
-
-        if (loadingScreen != null)
-        {
-            //StartCoroutine(HideLoadingScreen());
-        }
-
         if (scene.name == "FinalMenu")
         {
             Cursor.lockState = CursorLockMode.None;

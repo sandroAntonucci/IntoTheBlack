@@ -13,7 +13,6 @@ public class AsyncManager : MonoBehaviour
     
     public static AsyncManager Instance;
 
-
     public void Awake()
     {
         if (Instance != null)
